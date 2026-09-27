@@ -371,7 +371,7 @@ if (!divergenciasAtual.length) {
 }
 
 const registros =
-  divergenciasAtual.slice(0, 8);
+  divergenciasAtual.slice(0, 5);
 
 registros.forEach(function (registro) {
 
