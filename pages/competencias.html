@@ -1,0 +1,588 @@
+<section class="page-section competencias-page">
+
+  <div class="page-header competencias-page-header">
+
+    <div class="competencias-page-title">
+
+      <span class="page-kicker">
+        Controle operacional
+      </span>
+
+      <h2>
+        Competências
+      </h2>
+
+      <p>
+        Abra, acompanhe e encerre as competências de divergências do estoque.
+      </p>
+
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      id="btnNovaCompetencia"
+    >
+      Nova competência
+    </button>
+
+  </div>
+
+
+  <section class="card competencia-atual-card">
+
+    <div class="competencia-atual-top">
+
+      <div class="competencia-atual-identificacao">
+
+        <span class="section-kicker">
+          Competência atual
+        </span>
+
+        <div class="competencia-atual-titulo-row">
+
+          <h3 id="competenciaAtualNome">
+            Carregando...
+          </h3>
+
+          <span
+            class="competencia-status-pill"
+            id="competenciaAtualStatus"
+          >
+            Carregando...
+          </span>
+
+        </div>
+
+        <p id="competenciaAtualDescricao">
+          Verificando a competência aberta no momento.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="competencia-atual-resumo">
+
+      <div class="competencia-resumo-item">
+
+        <span>
+          Abertura
+        </span>
+
+        <strong id="competenciaAtualAbertura">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="competencia-resumo-item">
+
+        <span>
+          Divergências
+        </span>
+
+        <strong id="competenciaAtualRegistros">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="competencia-resumo-item">
+
+        <span>
+          Valor das divergências
+        </span>
+
+        <strong id="competenciaAtualValor">
+          R$ 0,00
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="competencia-atual-acoes">
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        id="btnVerCompetenciaAtual"
+      >
+        Ver competência
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-danger"
+        id="btnEncerrarCompetencia"
+      >
+        Encerrar competência
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section class="card competencias-historico-card">
+
+    <div class="competencias-historico-header">
+
+      <div>
+
+        <span class="section-kicker">
+          Histórico
+        </span>
+
+        <h3>
+          Competências cadastradas
+        </h3>
+
+        <p>
+          Consulte as competências abertas e encerradas.
+        </p>
+
+      </div>
+
+      <span
+        class="competencias-contador"
+        id="competenciasContador"
+      >
+        0 competências
+      </span>
+
+    </div>
+
+
+    <div class="competencias-table-wrapper">
+
+      <table class="competencias-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Competência
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Abertura
+            </th>
+
+            <th>
+              Encerramento
+            </th>
+
+            <th>
+              Divergências
+            </th>
+
+            <th>
+              Ações
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="competenciasTabela">
+
+          <tr>
+
+            <td
+              colspan="6"
+              class="competencias-table-message"
+            >
+              Carregando competências...
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</section>
+
+
+<div
+  class="competencias-modal hidden"
+  id="modalNovaCompetencia"
+  aria-hidden="true"
+>
+
+  <div
+    class="competencias-modal-dialog competencias-modal-dialog-small"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tituloNovaCompetencia"
+  >
+
+    <div class="competencias-modal-header">
+
+      <div>
+
+        <span class="competencias-modal-kicker">
+          Nova competência
+        </span>
+
+        <h3 id="tituloNovaCompetencia">
+          Abrir competência
+        </h3>
+
+      </div>
+
+      <button
+        type="button"
+        class="competencias-modal-close"
+        id="btnFecharNovaCompetencia"
+        aria-label="Fechar"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form
+      id="formNovaCompetencia"
+      class="competencias-modal-form"
+    >
+
+      <div class="competencias-form-group">
+
+        <label for="novaCompetencia">
+          Mês da competência
+        </label>
+
+        <input
+          type="month"
+          id="novaCompetencia"
+          name="novaCompetencia"
+          required
+        >
+
+        <span class="competencias-form-help">
+          Selecione o mês que será aberto para os registros de divergência.
+        </span>
+
+      </div>
+
+
+      <div class="competencias-modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="btnCancelarNovaCompetencia"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="btnSalvarNovaCompetencia"
+        >
+          Abrir competência
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div
+  class="competencias-modal hidden"
+  id="modalEncerramentoCompetencia"
+  aria-hidden="true"
+>
+
+  <div
+    class="competencias-modal-dialog competencias-modal-dialog-small"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tituloEncerramentoCompetencia"
+  >
+
+    <div class="competencias-modal-header">
+
+      <div>
+
+        <span class="competencias-modal-kicker">
+          Encerramento
+        </span>
+
+        <h3 id="tituloEncerramentoCompetencia">
+          Encerrar competência
+        </h3>
+
+      </div>
+
+      <button
+        type="button"
+        class="competencias-modal-close"
+        id="btnFecharEncerramento"
+        aria-label="Fechar"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="competencias-modal-content">
+
+      <div class="competencias-confirm-icon">
+        !
+      </div>
+
+      <div class="competencias-confirm-content">
+
+        <strong>
+          Encerrar
+          <span id="encerramentoCompetenciaNome">
+            —
+          </span>
+          ?
+        </strong>
+
+        <p>
+          Depois do encerramento, esta competência não poderá mais receber novos registros de divergência.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="competencias-modal-footer">
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        id="btnCancelarEncerramento"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-danger"
+        id="btnConfirmarEncerramento"
+      >
+        Encerrar competência
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="competencias-modal hidden"
+  id="modalVisualizacaoCompetencia"
+  aria-hidden="true"
+>
+
+  <div
+    class="competencias-modal-dialog competencias-modal-dialog-large"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="visualizacaoCompetenciaTitulo"
+  >
+
+    <div class="competencias-modal-header">
+
+      <div>
+
+        <span class="competencias-modal-kicker">
+          Detalhes da competência
+        </span>
+
+        <div class="competencias-visualizacao-title-row">
+
+          <h3 id="visualizacaoCompetenciaTitulo">
+            —
+          </h3>
+
+          <span
+            class="competencia-status-pill"
+            id="visualizacaoCompetenciaStatus"
+          >
+            —
+          </span>
+
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="competencias-modal-close"
+        id="btnFecharVisualizacaoCompetencia"
+        aria-label="Fechar"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="competencias-visualizacao-meta">
+
+      <div>
+
+        <span>
+          Abertura
+        </span>
+
+        <strong id="visualizacaoCompetenciaAbertura">
+          —
+        </strong>
+
+      </div>
+
+      <div>
+
+        <span>
+          Divergências
+        </span>
+
+        <strong id="visualizacaoTotalDivergencias">
+          0
+        </strong>
+
+      </div>
+
+      <div>
+
+        <span>
+          Valor total
+        </span>
+
+        <strong id="visualizacaoValorTotal">
+          R$ 0,00
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="competencias-visualizacao-table-wrapper">
+
+      <table class="competencias-visualizacao-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Código
+            </th>
+
+            <th>
+              Produto
+            </th>
+
+            <th>
+              Seção
+            </th>
+
+            <th>
+              Sistema
+            </th>
+
+            <th>
+              Físico
+            </th>
+
+            <th>
+              Divergência
+            </th>
+
+            <th>
+              Custo
+            </th>
+
+            <th>
+              Valor
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Observação
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="divergenciasCompetenciaTabela">
+
+          <tr>
+
+            <td
+              colspan="10"
+              class="competencias-table-message"
+            >
+              Nenhuma divergência carregada.
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="competencias-modal-footer">
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        id="btnFecharVisualizacaoCompetenciaFooter"
+      >
+        Fechar
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        id="btnGerarPdfCompetencia"
+      >
+        Gerar PDF
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

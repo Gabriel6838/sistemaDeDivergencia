@@ -1,0 +1,1012 @@
+/* =========================================================
+   STOCKVISION — PESQUISA
+   ========================================================= */
+
+#pesquisaPage {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA PÁGINA
+   ========================================================= */
+
+#pesquisaPage .page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+#pesquisaPage .page-eyebrow,
+#pesquisaPage .panel-eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+#pesquisaPage .page-header h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.15;
+}
+
+#pesquisaPage .page-header p {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   PAINÉIS
+   ========================================================= */
+
+#pesquisaPage .panel {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 24px;
+}
+
+#pesquisaPage .panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+#pesquisaPage .panel-header h3 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -.01em;
+}
+
+
+/* =========================================================
+   FILTROS
+   ========================================================= */
+
+#pesquisaPage .filters-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 18px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#pesquisaPage .form-group {
+  min-width: 0;
+}
+
+#pesquisaPage .form-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#pesquisaPage .form-group input,
+#pesquisaPage .form-group select {
+  display: block;
+  width: 100%;
+  min-height: 43px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #0f172a;
+  font-family: inherit;
+  font-size: 13px;
+  transition:
+    border-color .16s ease,
+    box-shadow .16s ease,
+    background-color .16s ease;
+}
+
+#pesquisaPage .form-group input::placeholder {
+  color: #94a3b8;
+}
+
+#pesquisaPage .form-group input:hover,
+#pesquisaPage .form-group select:hover {
+  border-color: #94a3b8;
+}
+
+#pesquisaPage .form-group input:focus,
+#pesquisaPage .form-group select:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, .10);
+}
+
+#pesquisaPage .form-group select {
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   AÇÕES DOS FILTROS
+   ========================================================= */
+
+#pesquisaPage .filter-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #eef2f7;
+}
+
+#pesquisaPage .filter-actions .btn {
+  min-width: 118px;
+}
+
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+
+#pesquisaPage .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+#pesquisaPage .data-table {
+  width: 100%;
+  min-width: 900px;
+}
+
+#pesquisaPage .data-table tbody tr {
+  transition: background-color .15s ease;
+}
+
+#pesquisaPage .data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+#pesquisaPage .table-code {
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 0 8px;
+  border: 1px solid #dbeafe;
+  border-radius: 6px;
+  background: #f8fbff;
+  color: #2563eb;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+#pesquisaPage .pesquisa-produto {
+  min-width: 220px;
+}
+
+#pesquisaPage .pesquisa-produto strong {
+  display: block;
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+#pesquisaPage .pesquisa-quantidade {
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+#pesquisaPage .pesquisa-quantidade.negative {
+  color: #dc2626;
+}
+
+#pesquisaPage .pesquisa-quantidade.positive {
+  color: #16a34a;
+}
+
+#pesquisaPage .pesquisa-quantidade.zero {
+  color: #64748b;
+}
+
+#pesquisaPage .pesquisa-valor {
+  color: #334155;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   MODAL HISTÓRICO
+   ========================================================= */
+
+#pesquisaPage #modalHistorico {
+  z-index: 1000;
+}
+
+#pesquisaPage .modal-xl {
+  width: min(
+    1080px,
+    calc(100vw - 40px)
+  );
+  max-height:
+    calc(100vh - 40px);
+}
+
+#pesquisaPage .modal-header {
+  padding: 22px 24px 18px;
+}
+
+#pesquisaPage .modal-header h3 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+#pesquisaPage .modal-header p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+#pesquisaPage .modal-body {
+  padding: 0 24px 24px;
+}
+
+
+/* =========================================================
+   RESUMO DO HISTÓRICO
+   ========================================================= */
+
+#pesquisaPage .history-summary {
+  display: grid;
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #e2e8f0;
+}
+
+#pesquisaPage .history-stat {
+  min-width: 0;
+  padding: 14px 16px;
+  background: #ffffff;
+}
+
+#pesquisaPage .history-stat-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+#pesquisaPage .history-stat-value {
+  display: block;
+  color: #0f172a;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+#pesquisaPage .timeline {
+  position: relative;
+  padding: 4px 0 12px 36px;
+}
+
+#pesquisaPage .timeline::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 18px;
+  left: 8px;
+  width: 1px;
+  background: #dbe3ee;
+}
+
+#pesquisaPage .timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+#pesquisaPage .timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+#pesquisaPage .timeline-marker {
+  position: absolute;
+  top: 17px;
+  left: -36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  box-sizing: border-box;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #2563eb;
+  box-shadow:
+    0 0 0 1px #bfdbfe;
+  z-index: 2;
+}
+
+#pesquisaPage .timeline-marker span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+#pesquisaPage .timeline-content {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   TOPO DO EVENTO
+   ========================================================= */
+
+#pesquisaPage .timeline-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 34px;
+  margin-bottom: 13px;
+}
+
+#pesquisaPage .timeline-main {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+#pesquisaPage .timeline-competencia {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 0 8px;
+  border: 1px solid #dbeafe;
+  border-radius: 6px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+#pesquisaPage .timeline-date {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   DETALHES DA DIVERGÊNCIA
+   ========================================================= */
+
+#pesquisaPage .timeline-details {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+#pesquisaPage .timeline-detail {
+  min-width: 0;
+  padding: 12px 14px;
+  border-right: 1px solid #e2e8f0;
+}
+
+#pesquisaPage .timeline-detail:last-child {
+  border-right: 0;
+}
+
+#pesquisaPage .timeline-detail-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+#pesquisaPage .timeline-detail-value {
+  display: block;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+#pesquisaPage .timeline-detail-value.negative {
+  color: #dc2626;
+}
+
+#pesquisaPage .timeline-detail-value.positive {
+  color: #16a34a;
+}
+
+#pesquisaPage .timeline-detail-value.zero {
+  color: #64748b;
+}
+
+
+/* =========================================================
+   OBSERVAÇÃO DA DIVERGÊNCIA
+   ========================================================= */
+
+#pesquisaPage .timeline-note {
+  margin-top: 12px;
+  padding: 11px 13px;
+  border-left: 2px solid #cbd5e1;
+  background: #f8fafc;
+}
+
+#pesquisaPage .timeline-note span,
+#pesquisaPage .timeline-trade-observation span {
+  display: block;
+  margin-bottom: 4px;
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+#pesquisaPage .timeline-note p,
+#pesquisaPage .timeline-trade-observation p {
+  margin: 0;
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   BLOCO DE TROCA
+   ========================================================= */
+
+#pesquisaPage .timeline-trade {
+  position: relative;
+  margin-top: 15px;
+  overflow: hidden;
+  border: 1px solid #dbe5f2;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TROCA
+   ========================================================= */
+
+#pesquisaPage .timeline-trade-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e7edf5;
+  background: #f8fbff;
+}
+
+#pesquisaPage .timeline-trade-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+#pesquisaPage .timeline-trade-title > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#pesquisaPage .timeline-trade-title strong {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+#pesquisaPage .timeline-trade-title > div > span {
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+#pesquisaPage .timeline-trade-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border: 1px solid #bfdbfe;
+  border-radius: 7px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   PRODUTO RELACIONADO
+   ========================================================= */
+
+#pesquisaPage .timeline-trade-product {
+  padding: 14px;
+}
+
+#pesquisaPage .timeline-trade-product-label {
+  display: block;
+  margin-bottom: 9px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+#pesquisaPage .timeline-trade-product-info {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 2fr)
+    minmax(120px, .8fr)
+    minmax(140px, 1fr);
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+#pesquisaPage .timeline-trade-product-field {
+  min-width: 0;
+  padding: 10px 12px;
+  border-right: 1px solid #e2e8f0;
+}
+
+#pesquisaPage .timeline-trade-product-field:last-child {
+  border-right: 0;
+}
+
+#pesquisaPage .timeline-trade-product-field span {
+  display: block;
+  margin-bottom: 4px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+#pesquisaPage .timeline-trade-product-field strong {
+  display: block;
+  overflow: hidden;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   DADOS DA TROCA
+   ========================================================= */
+
+#pesquisaPage .timeline-trade-details {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0 14px 14px;
+  padding-top: 10px;
+  border-top: 1px solid #eef2f7;
+}
+
+#pesquisaPage .timeline-trade-detail {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-right: 20px;
+}
+
+#pesquisaPage .timeline-trade-detail span {
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+#pesquisaPage .timeline-trade-detail strong {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   OBSERVAÇÃO DA TROCA
+   ========================================================= */
+
+#pesquisaPage .timeline-trade-observation {
+  margin: 0 14px 14px;
+  padding: 10px 12px;
+  border-left: 2px solid #cbd5e1;
+  background: #f8fafc;
+}
+
+
+/* =========================================================
+   DATA E HORA DA TROCA
+   ========================================================= */
+
+#pesquisaPage .timeline-trade-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 11px 14px;
+  border-top: 1px solid #e7edf5;
+  background: #f8fafc;
+}
+
+#pesquisaPage .timeline-trade-date,
+#pesquisaPage .timeline-trade-id {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+#pesquisaPage .timeline-trade-date span,
+#pesquisaPage .timeline-trade-id span {
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+#pesquisaPage .timeline-trade-date strong {
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#pesquisaPage .timeline-trade-id {
+  justify-content: flex-end;
+}
+
+#pesquisaPage .timeline-trade-id strong {
+  color: #64748b;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   TROCA SEM PRODUTO RELACIONADO
+   ========================================================= */
+
+#pesquisaPage .timeline-trade-product-empty {
+  margin: 14px;
+  padding: 12px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+#pesquisaPage .timeline-trade-product-empty span {
+  display: block;
+  margin-bottom: 4px;
+  color: #94a3b8;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+#pesquisaPage .timeline-trade-product-empty strong {
+  display: block;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   ESTADOS VAZIOS
+   ========================================================= */
+
+#pesquisaPage .empty-state {
+  padding: 36px 20px;
+  text-align: center;
+}
+
+#pesquisaPage .empty-state strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+#pesquisaPage .empty-state span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+#pesquisaPage .empty-state-error strong {
+  color: #b91c1c;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   RESPONSIVO — 1100PX
+   ========================================================= */
+
+@media screen and (max-width: 1100px) {
+
+  #pesquisaPage .filters-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  #pesquisaPage .history-summary {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  #pesquisaPage .timeline-trade-product-info {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  #pesquisaPage
+  .timeline-trade-product-field:nth-child(2) {
+    border-right: 0;
+  }
+
+  #pesquisaPage
+  .timeline-trade-product-field:nth-child(3) {
+    grid-column: 1 / -1;
+    border-top: 1px solid #e2e8f0;
+    border-right: 0;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVO — 700PX
+   ========================================================= */
+
+@media screen and (max-width: 700px) {
+
+  #pesquisaPage .page-header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #pesquisaPage .page-header .btn {
+    align-self: flex-start;
+  }
+
+  #pesquisaPage .panel {
+    padding: 20px;
+  }
+
+  #pesquisaPage .filters-grid {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+
+  #pesquisaPage .filter-actions {
+    justify-content: stretch;
+  }
+
+  #pesquisaPage .filter-actions .btn {
+    width: 100%;
+  }
+
+  #pesquisaPage .history-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  #pesquisaPage .timeline {
+    padding-left: 28px;
+  }
+
+  #pesquisaPage .timeline-marker {
+    left: -28px;
+  }
+
+  #pesquisaPage .timeline-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #pesquisaPage .timeline-details {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  #pesquisaPage .timeline-detail:nth-child(2) {
+    border-right: 0;
+  }
+
+  #pesquisaPage
+  .timeline-detail:nth-child(3),
+  #pesquisaPage
+  .timeline-detail:nth-child(4) {
+    border-top: 1px solid #e2e8f0;
+  }
+
+  #pesquisaPage .timeline-trade-product-info {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+
+  #pesquisaPage .timeline-trade-product-field {
+    border-right: 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  #pesquisaPage
+  .timeline-trade-product-field:last-child {
+    border-bottom: 0;
+  }
+
+  #pesquisaPage
+  .timeline-trade-product-field:nth-child(3) {
+    border-top: 0;
+  }
+
+  #pesquisaPage .timeline-trade-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #pesquisaPage .timeline-trade-id {
+    justify-content: flex-start;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVO — 480PX
+   ========================================================= */
+
+@media screen and (max-width: 480px) {
+
+  #pesquisaPage .page-header h2 {
+    font-size: 25px;
+  }
+
+  #pesquisaPage .panel {
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+
+  #pesquisaPage .panel-header {
+    margin-bottom: 18px;
+  }
+
+  #pesquisaPage .history-summary {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+
+  #pesquisaPage .timeline {
+    padding-left: 23px;
+  }
+
+  #pesquisaPage .timeline-marker {
+    left: -23px;
+  }
+
+  #pesquisaPage .timeline-details {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+
+  #pesquisaPage .timeline-detail {
+    border-right: 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  #pesquisaPage .timeline-detail:last-child {
+    border-bottom: 0;
+  }
+
+  #pesquisaPage .timeline-trade-header {
+    align-items: flex-start;
+  }
+
+  #pesquisaPage .timeline-trade-details {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  #pesquisaPage .timeline-trade-detail {
+    padding-top: 7px;
+    padding-right: 0;
+  }
+
+  #pesquisaPage .timeline-trade-date,
+  #pesquisaPage .timeline-trade-id {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+}

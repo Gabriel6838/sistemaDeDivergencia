@@ -1,0 +1,657 @@
+
+/* ============================================================
+   STOCKVISION — LAYOUT
+   Sidebar, topbar, conteúdo e navegação
+   ============================================================ */
+
+#app {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+
+  width: var(--sidebar-width);
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+
+  z-index: 1000;
+
+  transition: transform var(--transition);
+}
+
+.sidebar-header {
+  height: 86px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  border-bottom: 1px solid var(--border-light);
+}
+
+.brand {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #3b82f6
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 6px 14px rgba(37, 99, 235, 0.22);
+}
+
+.brand-icon-mark {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.brand-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 16px;
+  line-height: 1.2;
+
+  font-weight: 800;
+  letter-spacing: -0.02em;
+
+  color: var(--text);
+}
+
+.brand-subtitle {
+  margin-top: 3px;
+
+  font-size: 10px;
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  color: var(--text-muted);
+
+  white-space: nowrap;
+}
+
+.sidebar-close {
+  display: none;
+
+  width: 34px;
+  height: 34px;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: var(--text-muted);
+}
+
+.sidebar-close:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.sidebar-close span {
+  font-size: 26px;
+  line-height: 1;
+}
+
+/* ============================================================
+   COMPETÊNCIA
+   ============================================================ */
+
+.sidebar-competencia {
+  margin: 18px 14px 8px;
+  padding: 13px;
+
+  background: var(--primary-lighter);
+
+  border: 1px solid #dbeafe;
+  border-radius: var(--radius-md);
+}
+
+.sidebar-competencia-label {
+  margin-bottom: 9px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  color: var(--text-muted);
+}
+
+.sidebar-competencia-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-competencia-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: var(--success);
+
+  box-shadow: var(--shadow-xs);
+}
+
+.sidebar-competencia-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-competencia-info strong {
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.sidebar-competencia-info span {
+  margin-top: 3px;
+
+  font-size: 11px;
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* ============================================================
+   NAVEGAÇÃO
+   ============================================================ */
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+
+  padding: 14px 12px;
+}
+
+.nav-section {
+  margin-bottom: 22px;
+}
+
+.nav-section-title {
+  display: block;
+
+  padding: 0 11px 8px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--text-light);
+}
+
+.nav-item {
+  width: 100%;
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 0 11px;
+  margin-bottom: 3px;
+
+  border-radius: 9px;
+
+  color: var(--text-secondary);
+
+  text-align: left;
+
+  transition:
+    background var(--transition),
+    color var(--transition);
+}
+
+.nav-item:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.nav-item.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.nav-icon {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+
+  display: grid;
+  place-items: center;
+}
+
+.nav-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-label {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* ============================================================
+   SIDEBAR FOOTER
+   ============================================================ */
+
+.sidebar-footer {
+  padding: 15px 18px 18px;
+
+  border-top: 1px solid var(--border-light);
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.system-status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+
+  box-shadow:
+    0 0 0 3px var(--success-light);
+}
+
+.system-version {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 10px;
+  color: var(--text-light);
+}
+
+/* ============================================================
+   OVERLAY MOBILE
+   ============================================================ */
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(15, 23, 42, 0.38);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity var(--transition),
+    visibility var(--transition);
+
+  z-index: 900;
+}
+
+body.sidebar-open .sidebar-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ============================================================
+   CONTEÚDO PRINCIPAL
+   ============================================================ */
+
+.main-content {
+  width: calc(100% - var(--sidebar-width));
+  min-width: 0;
+
+  margin-left: var(--sidebar-width);
+
+  min-height: 100vh;
+}
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+
+.topbar {
+  position: sticky;
+  top: 0;
+
+  z-index: 800;
+
+  height: var(--topbar-height);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 32px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom: 1px solid var(--border);
+
+  backdrop-filter: blur(12px);
+}
+
+.topbar-left {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.menu-toggle {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background: var(--surface);
+}
+
+.menu-toggle span {
+  display: block;
+
+  width: 17px;
+  height: 2px;
+
+  margin: 3px auto;
+
+  background: var(--text-secondary);
+  border-radius: 2px;
+}
+
+.page-title-wrapper {
+  min-width: 0;
+}
+
+.page-eyebrow {
+  display: block;
+
+  margin-bottom: 3px;
+
+  font-size: 10px;
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--primary);
+}
+
+#pageHeading {
+  font-size: 21px;
+  line-height: 1.2;
+
+  font-weight: 800;
+  letter-spacing: -0.025em;
+
+  color: var(--text);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-competencia {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 7px 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: var(--surface);
+}
+
+.topbar-competencia-icon {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 8px;
+
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.topbar-competencia-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.topbar-competencia-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar-competencia-info span {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.topbar-competencia-info strong {
+  margin-top: 2px;
+
+  font-size: 12px;
+  color: var(--text);
+}
+
+/* ============================================================
+   PAGE CONTENT
+   ============================================================ */
+
+.page-content {
+  width: 100%;
+
+  min-height:
+    calc(100vh - var(--topbar-height));
+
+  padding: 30px 32px 40px;
+}
+
+.page-loader {
+  min-height: calc(100vh - 160px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 12px;
+
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.loader-spinner {
+  width: 28px;
+  height: 28px;
+
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+
+  border-radius: 50%;
+
+  animation:
+    stockvisionSpin 700ms linear infinite;
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+
+@media (max-width: 1000px) {
+  :root {
+    --sidebar-width: 240px;
+  }
+
+  .topbar {
+    padding: 0 24px;
+  }
+
+  .page-content {
+    padding: 26px 24px 35px;
+  }
+}
+
+@media (max-width: 850px) {
+  .sidebar {
+    transform: translateX(-100%);
+
+    box-shadow:
+      12px 0 35px rgba(15, 23, 42, 0.12);
+  }
+
+  .sidebar.is-open,
+  body.sidebar-open .sidebar {
+    transform: translateX(0);
+  }
+
+  .sidebar-close {
+    display: flex;
+  }
+
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+@media (max-width: 700px) {
+  .topbar {
+    height: 68px;
+    padding: 0 16px;
+  }
+
+  .topbar-competencia-info {
+    display: none;
+  }
+
+  .topbar-competencia {
+    padding: 5px 7px;
+  }
+
+  .topbar-competencia-icon {
+    width: 29px;
+    height: 29px;
+  }
+
+  .page-content {
+    min-height: calc(100vh - 68px);
+    padding: 22px 16px 30px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .page-header-actions {
+    width: 100%;
+  }
+
+  .page-header-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-subtitle {
+    display: none;
+  }
+
+  .sidebar-header {
+    height: 74px;
+  }
+
+  .topbar-left {
+    gap: 9px;
+  }
+
+  #pageHeading {
+    font-size: 18px;
+  }
+
+  .page-eyebrow {
+    font-size: 9px;
+  }
+}
+

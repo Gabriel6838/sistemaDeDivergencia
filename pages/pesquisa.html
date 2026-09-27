@@ -1,0 +1,366 @@
+<section
+  id="pesquisaPage"
+  class="page-section"
+  aria-labelledby="pesquisaTitulo"
+>
+
+  <div class="page-header">
+
+    <div>
+      <span class="page-eyebrow">
+        Consulta
+      </span>
+
+      <h2 id="pesquisaTitulo">
+        Pesquisa
+      </h2>
+
+      <p>
+        Consulte divergências por produto, competência e situação.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      id="btnLimparPesquisa"
+    >
+      Limpar filtros
+    </button>
+
+  </div>
+
+
+  <!-- FILTROS -->
+  <section class="panel">
+
+    <div class="panel-header">
+
+      <div>
+        <span class="panel-eyebrow">
+          Filtros
+        </span>
+
+        <h3>
+          Localizar divergências
+        </h3>
+      </div>
+
+    </div>
+
+
+    <div class="filters-grid">
+
+      <div class="form-group">
+        <label for="pesquisaCodigo">
+          Código
+        </label>
+
+        <input
+          type="search"
+          id="pesquisaCodigo"
+          placeholder="Código do produto"
+          autocomplete="off"
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label for="pesquisaDescricao">
+          Descrição
+        </label>
+
+        <input
+          type="search"
+          id="pesquisaDescricao"
+          placeholder="Nome do produto"
+          autocomplete="off"
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label for="pesquisaSecao">
+          Seção
+        </label>
+
+        <input
+          type="search"
+          id="pesquisaSecao"
+          placeholder="Seção"
+          autocomplete="off"
+        >
+      </div>
+
+
+      <div class="form-group">
+        <label for="pesquisaCompetencia">
+          Competência
+        </label>
+
+        <select id="pesquisaCompetencia">
+
+          <option value="">
+            Todas
+          </option>
+
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="pesquisaStatus">
+          Status
+        </label>
+
+        <select id="pesquisaStatus">
+
+          <option value="">
+            Todos
+          </option>
+
+          <option value="pendente">
+            Pendente
+          </option>
+
+          <option value="aguardando confirmação">
+            Aguardando confirmação
+          </option>
+
+          <option value="resolvida">
+            Resolvida
+          </option>
+
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="pesquisaTipo">
+          Tipo
+        </label>
+
+        <select id="pesquisaTipo">
+
+          <option value="">
+            Todos
+          </option>
+
+          <option value="negativa">
+            Faltas (-)
+          </option>
+
+          <option value="positiva">
+            Sobras (+)
+          </option>
+
+          <option value="zero">
+            Sem diferença
+          </option>
+
+        </select>
+      </div>
+
+    </div>
+
+
+    <div class="filter-actions">
+
+      <button
+        type="button"
+        id="btnExecutarPesquisa"
+        class="btn btn-primary"
+      >
+        Pesquisar
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- RESULTADOS -->
+  <section class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <span class="panel-eyebrow">
+          Resultados
+        </span>
+
+        <h3>
+          Divergências encontradas
+        </h3>
+
+      </div>
+
+
+      <span
+        id="pesquisaQuantidade"
+        class="status-pill status-info"
+      >
+        0 registros
+      </span>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table class="data-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Código
+            </th>
+
+            <th>
+              Produto
+            </th>
+
+            <th>
+              Seção
+            </th>
+
+            <th>
+              Competência
+            </th>
+
+            <th>
+              Qtd.
+            </th>
+
+            <th>
+              Valor
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th class="text-right">
+              Ações
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="pesquisaTabela">
+
+          <tr>
+
+            <td colspan="8">
+
+              <div class="empty-state">
+
+                <strong>
+                  Nenhuma pesquisa realizada
+                </strong>
+
+                <span>
+                  Use os filtros acima para consultar os registros.
+                </span>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- MODAL HISTÓRICO -->
+  <div
+    id="modalHistorico"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalHistoricoTitulo"
+  >
+
+    <div class="modal modal-xl">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="panel-eyebrow">
+            Histórico do produto
+          </span>
+
+          <h3 id="modalHistoricoTitulo">
+            —
+          </h3>
+
+          <p id="modalHistoricoSubtitulo">
+            —
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="btnFecharHistorico"
+          class="modal-close"
+          aria-label="Fechar histórico"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div
+          id="historicoResumo"
+          class="history-summary"
+        ></div>
+
+
+        <div
+          id="historicoTimeline"
+          class="timeline"
+        >
+
+          <div class="empty-state">
+            Carregando histórico...
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          id="btnFecharHistoricoRodape"
+          class="btn btn-secondary"
+        >
+          Fechar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

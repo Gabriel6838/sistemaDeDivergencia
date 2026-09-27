@@ -1,0 +1,1494 @@
+/* ============================================================
+STOCKVISION — PÁGINA INÍCIO
+Arquivo: css/inicio.css
+
+Este arquivo contém somente os estilos específicos
+da página Início.
+
+Os estilos globais ficam em:
+css/style.css
+============================================================ */
+
+/* ============================================================
+
+1. ESTRUTURA DA PÁGINA
+   ============================================================ */
+
+.inicio-page {
+width: 100%;
+min-width: 0;
+}
+
+/* ============================================================
+2. CABEÇALHO
+============================================================ */
+
+.inicio-header {
+margin-bottom: 24px;
+}
+
+.inicio-header .page-header-content {
+min-width: 0;
+}
+
+.inicio-header .page-eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+
+margin-bottom: 7px;
+
+font-size: 11px;
+line-height: 1.2;
+font-weight: 700;
+
+letter-spacing: 0.08em;
+text-transform: uppercase;
+
+color: var(--primary);
+}
+
+.inicio-header .page-header-content h2 {
+margin: 0;
+
+font-size: 28px;
+line-height: 1.15;
+font-weight: 800;
+
+letter-spacing: -0.035em;
+
+color: var(--text);
+}
+
+.inicio-header .page-header-content p {
+margin: 7px 0 0;
+
+max-width: 620px;
+
+font-size: 13px;
+line-height: 1.55;
+
+color: var(--text-muted);
+}
+
+.inicio-header .page-header-actions {
+flex-shrink: 0;
+}
+
+.inicio-header .btn-primary {
+min-height: 42px;
+
+}
+
+/* ============================================================
+3. CARDS DE INDICADORES
+============================================================ */
+
+.inicio-stats {
+display: grid;
+
+grid-template-columns:
+repeat(4, minmax(0, 1fr));
+
+gap: 16px;
+
+width: 100%;
+margin-bottom: 22px;
+}
+
+.inicio-stat-card {
+position: relative;
+
+min-width: 0;
+min-height: 156px;
+
+display: flex;
+flex-direction: column;
+
+padding: 18px 19px;
+
+background: var(--surface);
+
+border: 1px solid var(--border);
+border-radius: var(--radius-lg);
+
+box-shadow: var(--shadow-xs);
+
+overflow: hidden;
+
+transition:
+transform var(--transition),
+box-shadow var(--transition),
+border-color var(--transition);
+}
+
+.inicio-stat-card::after {
+content: "";
+
+position: absolute;
+
+left: 0;
+top: 0;
+bottom: 0;
+
+width: 3px;
+
+background: transparent;
+
+transition: background var(--transition);
+}
+
+.inicio-stat-card:hover {
+transform: translateY(-2px);
+
+border-color: #d8e1ed;
+
+box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+4. TOPO DOS CARDS
+============================================================ */
+
+.inicio-stat-card .stat-card-top {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+
+gap: 12px;
+
+margin-bottom: 18px;
+}
+
+.inicio-stat-card .stat-card-index {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+min-width: 26px;
+height: 22px;
+
+padding: 0 7px;
+
+border-radius: 6px;
+
+background: var(--surface-hover);
+
+color: var(--text-light);
+
+font-size: 9px;
+line-height: 1;
+font-weight: 800;
+
+letter-spacing: 0.06em;
+}
+
+/* ============================================================
+5. ÍCONES DOS CARDS
+============================================================ */
+
+.inicio-stat-card .stat-icon {
+width: 40px;
+height: 40px;
+
+flex-shrink: 0;
+
+display: grid;
+place-items: center;
+
+border-radius: 11px;
+}
+
+.inicio-stat-card .stat-icon svg {
+width: 19px;
+height: 19px;
+}
+
+/* CORES */
+
+.inicio-stat-card .stat-icon-primary {
+color: var(--primary);
+background: var(--primary-light);
+}
+
+.inicio-stat-card .stat-icon-danger {
+color: var(--danger);
+background: var(--danger-light);
+}
+
+.inicio-stat-card .stat-icon-success {
+color: var(--success);
+background: var(--success-light);
+}
+
+.inicio-stat-card .stat-icon-warning {
+color: var(--warning);
+background: var(--warning-light);
+}
+
+/* BARRA LATERAL DE CADA CARD */
+
+.inicio-stat-card:nth-child(1)::after {
+background: var(--primary);
+}
+
+.inicio-stat-card:nth-child(2)::after {
+background: var(--danger);
+}
+
+.inicio-stat-card:nth-child(3)::after {
+background: var(--success);
+}
+
+.inicio-stat-card:nth-child(4)::after {
+background: var(--warning);
+}
+
+/* ============================================================
+6. CONTEÚDO DOS CARDS
+============================================================ */
+
+.inicio-stat-card .stat-card-content {
+min-width: 0;
+
+display: flex;
+flex-direction: column;
+
+margin-top: auto;
+}
+
+.inicio-stat-card .stat-label {
+display: block;
+
+font-size: 11px;
+line-height: 1.3;
+font-weight: 700;
+
+color: var(--text-muted);
+}
+
+.inicio-stat-card .stat-value {
+display: block;
+
+margin-top: 5px;
+
+font-size: 23px;
+line-height: 1.15;
+font-weight: 800;
+
+letter-spacing: -0.035em;
+
+color: var(--text);
+
+white-space: nowrap;
+}
+
+.inicio-stat-card .stat-description {
+display: block;
+
+margin-top: 6px;
+
+font-size: 10px;
+line-height: 1.35;
+
+color: var(--text-light);
+}
+
+/* CORES INICIAIS */
+
+.inicio-stat-card .stat-value-danger {
+color: var(--danger);
+}
+
+.inicio-stat-card .stat-value-success {
+color: var(--success);
+}
+
+/* ============================================================
+7. CORES DINÂMICAS DOS INDICADORES
+Criadas pelo inicio.js
+============================================================ */
+
+.inicio-stat-card .value-negative {
+color: var(--danger);
+}
+
+.inicio-stat-card .value-positive {
+color: var(--success);
+}
+
+.inicio-stat-card .value-neutral {
+color: var(--text);
+}
+
+/* ============================================================
+8. ÁREA PRINCIPAL
+============================================================ */
+
+.inicio-main-grid {
+display: grid;
+
+grid-template-columns:
+minmax(0, 1fr)
+320px;
+
+gap: 18px;
+
+width: 100%;
+
+align-items: stretch;
+}
+
+/* ============================================================
+9. PAINEL DE ÚLTIMAS DIVERGÊNCIAS
+============================================================ */
+
+.inicio-divergencias-panel {
+min-width: 0;
+overflow: hidden;
+}
+
+.inicio-divergencias-panel .panel-header {
+min-height: 76px;
+}
+
+.inicio-divergencias-panel .panel-heading {
+min-width: 0;
+}
+
+.inicio-divergencias-panel .panel-eyebrow,
+.inicio-competencia-panel .panel-eyebrow {
+display: block;
+
+margin-bottom: 5px;
+
+font-size: 10px;
+line-height: 1.2;
+font-weight: 700;
+
+letter-spacing: 0.07em;
+text-transform: uppercase;
+
+color: var(--text-light);
+}
+
+.inicio-divergencias-panel .panel-header h3,
+.inicio-competencia-panel .panel-header h3 {
+margin: 0;
+
+color: var(--text);
+
+font-size: 16px;
+line-height: 1.3;
+font-weight: 800;
+
+letter-spacing: -0.015em;
+}
+
+.inicio-divergencias-panel .btn-ghost {
+flex-shrink: 0;
+
+min-height: 36px;
+
+white-space: nowrap;
+}
+
+.inicio-divergencias-panel .btn-ghost svg,
+.inicio-competencia-panel .btn svg,
+.inicio-alerta .btn svg {
+width: 15px;
+height: 15px;
+
+flex-shrink: 0;
+}
+
+/* ============================================================
+10. TABELA
+============================================================ */
+
+.inicio-table-wrapper {
+width: 100%;
+
+overflow-x: auto;
+overflow-y: hidden;
+
+-webkit-overflow-scrolling: touch;
+}
+
+.inicio-table {
+width: 100%;
+min-width: 650px;
+
+border-collapse: collapse;
+}
+
+/* CABEÇALHO */
+
+.inicio-table thead th {
+height: 42px;
+
+padding: 0 18px;
+
+background: #f8fafc;
+
+border-top: 1px solid var(--border-light);
+border-bottom: 1px solid var(--border);
+
+color: var(--text-muted);
+
+font-size: 9px;
+line-height: 1;
+font-weight: 800;
+
+letter-spacing: 0.055em;
+text-transform: uppercase;
+
+text-align: left;
+
+white-space: nowrap;
+}
+
+.inicio-table thead th:first-child {
+padding-left: 20px;
+}
+
+.inicio-table thead th:last-child {
+padding-right: 20px;
+}
+
+/* LINHAS */
+
+.inicio-table tbody tr {
+transition: background var(--transition);
+}
+
+.inicio-table tbody tr:hover {
+background: var(--surface-hover);
+}
+
+.inicio-table tbody td {
+height: 66px;
+
+padding: 11px 18px;
+
+border-bottom: 1px solid var(--border-light);
+
+color: var(--text-secondary);
+
+font-size: 12px;
+line-height: 1.35;
+
+vertical-align: middle;
+}
+
+.inicio-table tbody tr:last-child td {
+border-bottom: 0;
+}
+
+.inicio-table tbody td:first-child {
+padding-left: 20px;
+}
+
+.inicio-table tbody td:last-child {
+padding-right: 20px;
+}
+
+/* ============================================================
+11. PRODUTO NA TABELA
+============================================================ */
+
+.inicio-table .product-cell {
+display: flex;
+flex-direction: column;
+
+min-width: 0;
+
+gap: 3px;
+}
+
+.inicio-table .product-cell strong {
+display: block;
+
+max-width: 280px;
+
+overflow: hidden;
+
+color: var(--text);
+
+font-size: 12px;
+line-height: 1.35;
+font-weight: 700;
+
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.inicio-table .product-cell span {
+display: block;
+
+color: var(--text-light);
+
+font-size: 10px;
+line-height: 1.2;
+font-weight: 600;
+}
+
+/* ============================================================
+12. DIVERGÊNCIA DE QUANTIDADE
+============================================================ */
+
+.inicio-table .quantity-negative,
+.inicio-table .quantity-positive,
+.inicio-table .quantity-neutral {
+display: inline-flex;
+align-items: center;
+
+min-width: 54px;
+
+font-size: 12px;
+line-height: 1;
+font-weight: 800;
+}
+
+.inicio-table .quantity-negative {
+color: var(--danger);
+}
+
+.inicio-table .quantity-positive {
+color: var(--success);
+}
+
+.inicio-table .quantity-neutral {
+color: var(--text-muted);
+}
+
+/* ============================================================
+13. VALOR DA DIVERGÊNCIA
+============================================================ */
+
+.inicio-table .value-negative,
+.inicio-table .value-positive,
+.inicio-table .value-neutral {
+font-weight: 800;
+
+white-space: nowrap;
+}
+
+.inicio-table .value-negative {
+color: var(--danger);
+}
+
+.inicio-table .value-positive {
+color: var(--success);
+}
+
+.inicio-table .value-neutral {
+color: var(--text-muted);
+}
+
+/* ============================================================
+14. STATUS DA TABELA
+============================================================ */
+
+.inicio-table .status-badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+min-height: 25px;
+
+padding: 0 9px;
+
+border-radius: 999px;
+
+font-size: 9px;
+line-height: 1;
+font-weight: 700;
+
+white-space: nowrap;
+}
+
+/* PENDENTE */
+
+.inicio-table .status-pendente {
+color: #b45309;
+background: #fff7ed;
+border: 1px solid #fed7aa;
+}
+
+/* AGUARDANDO CONFIRMAÇÃO */
+
+.inicio-table .status-atencao {
+color: #a16207;
+background: #fefce8;
+border: 1px solid #fde68a;
+}
+
+/* RESOLVIDA */
+
+.inicio-table .status-resolvida {
+color: #15803d;
+background: #f0fdf4;
+border: 1px solid #bbf7d0;
+}
+
+/* CONTINUA */
+
+.inicio-table .status-continua {
+color: #2563eb;
+background: #eff6ff;
+border: 1px solid #bfdbfe;
+}
+
+/* EM ANÁLISE */
+
+.inicio-table .status-analise {
+color: #7c3aed;
+background: #f5f3ff;
+border: 1px solid #ddd6fe;
+}
+
+/* ============================================================
+15. ESTADO VAZIO DA TABELA
+============================================================ */
+
+.inicio-table .table-empty-row td,
+.inicio-table .table-empty td {
+height: 230px;
+
+padding: 30px 20px;
+
+border-bottom: 0;
+
+text-align: center;
+}
+
+.inicio-empty-state,
+.inicio-table .empty-state.compact {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+min-height: 165px;
+
+gap: 7px;
+
+text-align: center;
+}
+
+.inicio-empty-state .empty-state-icon,
+.inicio-table .empty-state.compact .empty-state-icon {
+width: 42px;
+height: 42px;
+
+display: grid;
+place-items: center;
+
+margin-bottom: 4px;
+
+border-radius: 12px;
+
+background: var(--primary-light);
+
+color: var(--primary);
+}
+
+.inicio-empty-state .empty-state-icon svg,
+.inicio-table .empty-state.compact .empty-state-icon svg {
+width: 20px;
+height: 20px;
+}
+
+.inicio-table .empty-state.compact .empty-state-icon {
+font-size: 18px;
+font-weight: 800;
+}
+
+.inicio-empty-state strong,
+.inicio-table .empty-state.compact strong {
+color: var(--text);
+
+font-size: 12px;
+line-height: 1.4;
+font-weight: 700;
+}
+
+.inicio-empty-state span,
+.inicio-table .empty-state.compact span {
+max-width: 330px;
+
+color: var(--text-light);
+
+font-size: 10px;
+line-height: 1.5;
+}
+
+/* ============================================================
+16. PAINEL DA COMPETÊNCIA
+============================================================ */
+
+.inicio-competencia-panel {
+min-width: 0;
+
+display: flex;
+flex-direction: column;
+
+overflow: hidden;
+}
+
+.inicio-competencia-panel .panel-header {
+min-height: 76px;
+}
+
+/* ============================================================
+17. CONTEÚDO DA COMPETÊNCIA
+============================================================ */
+
+.inicio-competencia-panel .competencia-summary {
+padding: 18px 20px 8px;
+}
+
+/* ============================================================
+18. STATUS DA COMPETÊNCIA
+============================================================ */
+
+.inicio-competencia-panel .competencia-status-card {
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+gap: 14px;
+
+min-width: 0;
+}
+
+.inicio-competencia-panel .summary-info {
+min-width: 0;
+
+display: flex;
+flex-direction: column;
+
+gap: 4px;
+}
+
+.inicio-competencia-panel .summary-label {
+color: var(--text-secondary);
+
+font-size: 11px;
+line-height: 1.3;
+font-weight: 700;
+}
+
+.inicio-competencia-panel .summary-description {
+color: var(--text-light);
+
+font-size: 9px;
+line-height: 1.3;
+}
+
+/* ============================================================
+19. STATUS BADGE DA COMPETÊNCIA
+============================================================ */
+
+.inicio-competencia-panel .status-pill,
+.inicio-competencia-panel .status-badge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+flex-shrink: 0;
+
+min-height: 27px;
+
+padding: 0 10px;
+
+border-radius: 999px;
+
+font-size: 9px;
+line-height: 1;
+font-weight: 700;
+
+white-space: nowrap;
+}
+
+/* COMPATÍVEL COM O inicio.js */
+
+.inicio-competencia-panel .status-aberta {
+color: #15803d;
+
+background: #f0fdf4;
+
+border: 1px solid #bbf7d0;
+}
+
+.inicio-competencia-panel .status-atencao {
+color: #a16207;
+
+background: #fefce8;
+
+border: 1px solid #fde68a;
+}
+
+/* ============================================================
+20. DIVISOR
+============================================================ */
+
+.inicio-competencia-panel .summary-divider {
+height: 1px;
+
+margin: 18px 0 11px;
+
+background: var(--border-light);
+}
+
+/* ============================================================
+21. LINHAS DO RESUMO
+============================================================ */
+
+.inicio-competencia-panel .summary-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+gap: 15px;
+
+min-height: 39px;
+
+padding: 7px 0;
+
+border-bottom: 1px solid var(--border-light);
+}
+
+.inicio-competencia-panel .summary-row:last-child {
+border-bottom: 0;
+}
+
+.inicio-competencia-panel .summary-row span {
+color: var(--text-muted);
+
+font-size: 10px;
+line-height: 1.3;
+}
+
+.inicio-competencia-panel .summary-row strong {
+color: var(--text);
+
+font-size: 11px;
+line-height: 1.3;
+font-weight: 800;
+
+white-space: nowrap;
+}
+
+/* CORES */
+
+.inicio-competencia-panel .summary-row .text-danger {
+color: var(--danger);
+}
+
+.inicio-competencia-panel .summary-row .text-success {
+color: var(--success);
+}
+
+/* SALDO */
+
+.inicio-competencia-panel .summary-row-total {
+margin-top: 4px;
+
+min-height: 48px;
+
+border-top: 1px solid var(--border);
+
+border-bottom: 0;
+}
+
+.inicio-competencia-panel .summary-row-total span {
+color: var(--text-secondary);
+
+font-weight: 700;
+}
+
+.inicio-competencia-panel .summary-row-total strong {
+font-size: 14px;
+}
+
+/* ============================================================
+22. RODAPÉ DO PAINEL
+============================================================ */
+
+.inicio-competencia-panel .summary-footer {
+margin-top: auto;
+
+padding: 14px 20px 20px;
+}
+
+.inicio-competencia-panel .summary-footer .btn {
+width: 100%;
+
+min-height: 40px;
+
+justify-content: center;
+}
+
+/* ============================================================
+23. ALERTA — SEM COMPETÊNCIA
+============================================================ */
+
+.inicio-alerta {
+display: flex;
+align-items: center;
+
+gap: 14px;
+
+width: 100%;
+
+margin-top: 20px;
+
+padding: 16px 18px;
+
+background: #fffbeb;
+
+border: 1px solid #fde68a;
+border-radius: var(--radius-lg);
+
+box-shadow: var(--shadow-xs);
+}
+
+.inicio-alerta[hidden] {
+display: none !important;
+}
+
+.inicio-alerta .alert-icon {
+width: 38px;
+height: 38px;
+
+flex-shrink: 0;
+
+display: grid;
+place-items: center;
+
+border-radius: 10px;
+
+background: #fef3c7;
+
+color: #b45309;
+}
+
+.inicio-alerta .alert-icon svg {
+width: 19px;
+height: 19px;
+}
+
+.inicio-alerta .alert-content {
+min-width: 0;
+
+flex: 1;
+}
+
+.inicio-alerta .alert-content strong {
+display: block;
+
+color: #92400e;
+
+font-size: 12px;
+line-height: 1.35;
+font-weight: 800;
+}
+
+.inicio-alerta .alert-content p {
+margin: 4px 0 0;
+
+color: #a16207;
+
+font-size: 10px;
+line-height: 1.45;
+}
+
+.inicio-alerta .btn {
+flex-shrink: 0;
+}
+
+/* ============================================================
+24. ESTADO DE ERRO
+============================================================ */
+
+.inicio-page .page-error {
+width: 100%;
+}
+
+/* ============================================================
+25. RESPONSIVIDADE — ATÉ 1200px
+============================================================ */
+
+@media (max-width: 1200px) {
+
+.inicio-stats {
+grid-template-columns:
+repeat(2, minmax(0, 1fr));
+}
+
+.inicio-main-grid {
+grid-template-columns:
+minmax(0, 1fr)
+290px;
+}
+
+}
+
+/* ============================================================
+26. RESPONSIVIDADE — ATÉ 1000px
+============================================================ */
+
+@media (max-width: 1000px) {
+
+.inicio-main-grid {
+grid-template-columns: 1fr;
+}
+
+.inicio-competencia-panel {
+display: grid;
+
+
+grid-template-columns:
+  minmax(0, 1fr)
+  auto;
+
+align-items: stretch;
+
+
+}
+
+.inicio-competencia-panel .panel-header {
+border-bottom: 0;
+}
+
+.inicio-competencia-panel .competencia-summary {
+padding-top: 18px;
+padding-bottom: 8px;
+}
+
+.inicio-competencia-panel .summary-footer {
+grid-column: 1 / -1;
+
+
+margin-top: 0;
+
+padding-top: 14px;
+
+border-top: 1px solid var(--border-light);
+
+
+}
+
+}
+
+/* ============================================================
+27. RESPONSIVIDADE — ATÉ 850px
+============================================================ */
+
+@media (max-width: 850px) {
+
+.inicio-header .page-header-content h2 {
+font-size: 25px;
+}
+
+.inicio-stats {
+gap: 12px;
+}
+
+.inicio-stat-card {
+min-height: 148px;
+
+
+padding: 16px;
+
+
+}
+
+.inicio-stat-card .stat-value {
+font-size: 21px;
+}
+
+.inicio-table {
+min-width: 620px;
+}
+
+}
+
+/* ============================================================
+28. RESPONSIVIDADE — ATÉ 700px
+============================================================ */
+
+@media (max-width: 700px) {
+
+.inicio-header {
+align-items: flex-start;
+}
+
+.inicio-header .page-header-content h2 {
+font-size: 23px;
+}
+
+.inicio-header .page-header-content p {
+font-size: 12px;
+}
+
+.inicio-header .page-header-actions .btn {
+min-height: 40px;
+
+
+padding-left: 12px;
+padding-right: 12px;
+
+
+}
+
+.inicio-header .page-header-actions .btn span {
+display: none;
+}
+
+.inicio-header .page-header-actions .btn svg {
+width: 17px;
+height: 17px;
+
+
+margin: 0;
+
+
+}
+
+.inicio-stats {
+grid-template-columns:
+repeat(2, minmax(0, 1fr));
+
+
+gap: 10px;
+
+margin-bottom: 16px;
+
+
+}
+
+.inicio-stat-card {
+min-height: 136px;
+
+
+padding: 14px;
+
+
+}
+
+.inicio-stat-card .stat-card-top {
+margin-bottom: 13px;
+}
+
+.inicio-stat-card .stat-icon {
+width: 36px;
+height: 36px;
+
+
+border-radius: 9px;
+
+
+}
+
+.inicio-stat-card .stat-icon svg {
+width: 17px;
+height: 17px;
+}
+
+.inicio-stat-card .stat-card-index {
+min-width: 23px;
+height: 20px;
+
+
+font-size: 8px;
+
+
+}
+
+.inicio-stat-card .stat-value {
+font-size: 18px;
+}
+
+.inicio-stat-card .stat-description {
+font-size: 9px;
+}
+
+.inicio-divergencias-panel .panel-header {
+min-height: 68px;
+
+
+padding-left: 14px;
+padding-right: 14px;
+
+
+}
+
+.inicio-divergencias-panel .panel-header h3,
+.inicio-competencia-panel .panel-header h3 {
+font-size: 14px;
+}
+
+.inicio-divergencias-panel .panel-eyebrow,
+.inicio-competencia-panel .panel-eyebrow {
+font-size: 9px;
+}
+
+.inicio-divergencias-panel .btn-ghost {
+min-height: 34px;
+
+
+padding-left: 9px;
+padding-right: 9px;
+
+font-size: 10px;
+
+
+}
+
+.inicio-table thead th {
+height: 38px;
+
+
+padding-left: 12px;
+padding-right: 12px;
+
+font-size: 8px;
+
+
+}
+
+.inicio-table tbody td {
+height: 60px;
+
+
+padding-left: 12px;
+padding-right: 12px;
+
+font-size: 11px;
+
+
+}
+
+.inicio-table tbody td:first-child,
+.inicio-table thead th:first-child {
+padding-left: 14px;
+}
+
+.inicio-table tbody td:last-child,
+.inicio-table thead th:last-child {
+padding-right: 14px;
+}
+
+.inicio-table .product-cell strong {
+max-width: 190px;
+
+
+font-size: 11px;
+
+
+}
+
+.inicio-competencia-panel {
+display: block;
+}
+
+.inicio-competencia-panel .panel-header {
+border-bottom: 1px solid var(--border-light);
+}
+
+.inicio-competencia-panel .competencia-summary {
+padding-left: 16px;
+padding-right: 16px;
+}
+
+.inicio-competencia-panel .summary-footer {
+padding-left: 16px;
+padding-right: 16px;
+}
+
+.inicio-alerta {
+align-items: flex-start;
+
+
+flex-wrap: wrap;
+
+padding: 14px;
+
+
+}
+
+.inicio-alerta .alert-content {
+flex-basis: calc(100% - 56px);
+}
+
+.inicio-alerta .btn {
+width: 100%;
+
+
+margin-top: 2px;
+
+
+}
+
+}
+
+/* ============================================================
+29. RESPONSIVIDADE — ATÉ 480px
+============================================================ */
+
+@media (max-width: 480px) {
+
+.inicio-header {
+display: flex;
+align-items: flex-start;
+}
+
+.inicio-header .page-header-content {
+min-width: 0;
+}
+
+.inicio-header .page-header-content h2 {
+font-size: 21px;
+}
+
+.inicio-header .page-header-content p {
+max-width: 270px;
+
+
+font-size: 11px;
+
+
+}
+
+.inicio-header .page-header-actions .btn {
+width: 40px;
+height: 40px;
+
+
+padding: 0;
+
+border-radius: 10px;
+
+
+}
+
+.inicio-stats {
+grid-template-columns: 1fr;
+
+
+gap: 9px;
+
+
+}
+
+.inicio-stat-card {
+min-height: 112px;
+
+
+display: grid;
+
+grid-template-columns: auto minmax(0, 1fr);
+
+column-gap: 13px;
+
+padding: 14px;
+
+
+}
+
+.inicio-stat-card .stat-card-top {
+width: 38px;
+
+
+margin: 0;
+
+
+}
+
+.inicio-stat-card .stat-card-index {
+display: none;
+}
+
+.inicio-stat-card .stat-card-content {
+margin: 0;
+}
+
+.inicio-stat-card .stat-value {
+font-size: 20px;
+}
+
+.inicio-stat-card .stat-description {
+margin-top: 4px;
+}
+
+.inicio-divergencias-panel .panel-header {
+min-height: 64px;
+}
+
+.inicio-divergencias-panel .btn-ghost span {
+display: none;
+}
+
+.inicio-divergencias-panel .btn-ghost {
+width: 34px;
+height: 34px;
+
+
+padding: 0;
+
+
+}
+
+.inicio-divergencias-panel .btn-ghost svg {
+margin: 0;
+}
+
+.inicio-table {
+min-width: 590px;
+}
+
+.inicio-competencia-panel .competencia-status-card {
+align-items: flex-start;
+}
+
+.inicio-competencia-panel .summary-row {
+min-height: 37px;
+}
+
+.inicio-alerta {
+gap: 11px;
+}
+
+.inicio-alerta .alert-icon {
+width: 34px;
+height: 34px;
+}
+
+.inicio-alerta .alert-content {
+flex-basis: calc(100% - 48px);
+}
+
+}
+
+/* ============================================================
+30. ACESSIBILIDADE
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+.inicio-stat-card {
+transition: none;
+}
+
+.inicio-stat-card:hover {
+transform: none;
+}
+
+.inicio-table tbody tr {
+transition: none;
+}
+
+}

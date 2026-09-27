@@ -1,0 +1,571 @@
+<section
+  id="novaDivergenciaPage"
+  class="page-section"
+  aria-labelledby="novaDivergenciaTitulo"
+>
+
+  <div class="page-header">
+    <div>
+      <span class="page-eyebrow">Controle operacional</span>
+
+      <h2 id="novaDivergenciaTitulo">
+        Nova Divergência
+      </h2>
+
+      <p>
+        Registre uma diferença entre o estoque do sistema e a contagem física.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      data-page="pesquisa"
+    >
+      Pesquisar divergências
+    </button>
+  </div>
+
+
+  <div
+    id="novaDivergenciaAlerta"
+    class="alert alert-warning hidden"
+  >
+    <div class="alert-icon">!</div>
+
+    <div>
+      <strong>Nenhuma competência aberta</strong>
+      <p>
+        Abra uma competência antes de registrar uma divergência.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-secondary btn-sm"
+      data-page="competencias"
+    >
+      Gerenciar competências
+    </button>
+  </div>
+
+
+  <div class="form-layout">
+
+    <section class="panel">
+
+      <div class="panel-header">
+        <div>
+          <span class="panel-eyebrow">
+            Registro
+          </span>
+
+          <h3>
+            Dados da divergência
+          </h3>
+        </div>
+
+        <div
+          id="novaDivergenciaCompetencia"
+          class="status-pill status-info"
+        >
+          —
+        </div>
+      </div>
+
+
+      <form id="formNovaDivergencia">
+
+        <div class="form-grid">
+
+          <div class="form-group form-group-wide">
+            <label for="divergenciaCodigo">
+              Código do produto
+            </label>
+
+            <div class="input-action">
+              <input
+                type="text"
+                id="divergenciaCodigo"
+                name="codigo"
+                autocomplete="off"
+                placeholder="Digite ou leia o código"
+                required
+              >
+
+              <button
+                type="button"
+                id="btnBuscarProdutoDivergencia"
+                class="btn btn-secondary"
+              >
+                Buscar
+              </button>
+            </div>
+
+            <small>
+              Informe o código cadastrado na base de produtos.
+            </small>
+          </div>
+
+
+          <div
+            id="produtoEncontradoBox"
+            class="product-preview hidden"
+          >
+            <div class="product-preview-main">
+
+              <span class="product-preview-label">
+                Produto localizado
+              </span>
+
+              <strong id="produtoEncontradoDescricao">
+                —
+              </strong>
+
+              <span id="produtoEncontradoCodigo">
+                —
+              </span>
+
+            </div>
+
+            <div class="product-preview-section">
+              <span>Seção</span>
+              <strong id="produtoEncontradoSecao">
+                —
+              </strong>
+            </div>
+          </div>
+
+
+          <div
+            id="produtoNaoEncontradoBox"
+            class="empty-inline hidden"
+          >
+            <div>
+              <strong>Produto não encontrado</strong>
+
+              <p>
+                Esse código ainda não está cadastrado na base.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              id="btnCadastrarProdutoDivergencia"
+              class="btn btn-primary"
+            >
+              Cadastrar produto
+            </button>
+          </div>
+
+
+          <div class="form-group">
+            <label for="divergenciaCusto">
+              Preço de custo
+            </label>
+
+            <div class="input-money">
+              <span>R$</span>
+
+              <input
+                type="number"
+                id="divergenciaCusto"
+                name="custo"
+                min="0"
+                step="0.01"
+                placeholder="0,00"
+                required
+              >
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="divergenciaSistema">
+              Quantidade no sistema
+            </label>
+
+            <input
+              type="number"
+              id="divergenciaSistema"
+              name="quantidadeSistema"
+              min="0"
+              step="1"
+              value="0"
+              required
+            >
+          </div>
+
+
+          <div class="form-group">
+            <label for="divergenciaFisico">
+              Quantidade física
+            </label>
+
+            <input
+              type="number"
+              id="divergenciaFisico"
+              name="quantidadeFisica"
+              min="0"
+              step="1"
+              value="0"
+              required
+            >
+          </div>
+
+
+          <div class="form-group">
+            <label>
+              Divergência
+            </label>
+
+            <div
+              id="divergenciaQuantidadePreview"
+              class="calculation-box"
+            >
+              0 unidades
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label>
+              Valor da divergência
+            </label>
+
+            <div
+              id="divergenciaValorPreview"
+              class="calculation-box"
+            >
+              R$ 0,00
+            </div>
+          </div>
+
+
+          <div class="form-group form-group-full">
+            <label for="divergenciaObservacao">
+              Observação
+            </label>
+
+            <textarea
+              id="divergenciaObservacao"
+              name="observacao"
+              rows="4"
+              placeholder="Informe alguma observação sobre a divergência..."
+            ></textarea>
+          </div>
+
+        </div>
+
+
+        <div class="form-footer">
+
+          <button
+            type="button"
+            id="btnLimparDivergencia"
+            class="btn btn-secondary"
+          >
+            Limpar
+          </button>
+
+          <button
+            type="submit"
+            id="btnSalvarDivergencia"
+            class="btn btn-primary"
+          >
+            Registrar divergência
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <aside class="panel panel-side">
+
+      <div class="panel-header">
+        <div>
+          <span class="panel-eyebrow">
+            Resultado
+          </span>
+
+          <h3>
+            Resumo
+          </h3>
+        </div>
+      </div>
+
+      <div class="result-summary">
+
+        <div class="result-row">
+          <span>Produto</span>
+          <strong id="resumoProduto">—</strong>
+        </div>
+
+        <div class="result-row">
+          <span>Sistema</span>
+          <strong id="resumoSistema">0</strong>
+        </div>
+
+        <div class="result-row">
+          <span>Físico</span>
+          <strong id="resumoFisico">0</strong>
+        </div>
+
+        <div class="result-row">
+          <span>Quantidade</span>
+          <strong id="resumoQuantidade">0</strong>
+        </div>
+
+        <div class="result-row result-row-total">
+          <span>Valor</span>
+          <strong id="resumoValor">
+            R$ 0,00
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="side-info">
+        <strong>Como é calculado?</strong>
+
+        <p>
+          Divergência =
+          quantidade física − quantidade do sistema.
+        </p>
+
+        <p>
+          Valor =
+          divergência × preço de custo.
+        </p>
+      </div>
+
+    </aside>
+
+  </div>
+
+
+  <!-- MODAL DE TROCAS -->
+
+  <div
+    id="modalTrocas"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTrocasTitulo"
+  >
+
+    <div class="modal modal-large">
+
+      <div class="modal-header">
+
+        <div>
+          <span class="panel-eyebrow">
+            Associação
+          </span>
+
+          <h3 id="modalTrocasTitulo">
+            Trocar divergência
+          </h3>
+
+          <p>
+            Relacione esta divergência com outra divergência existente.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          id="btnFecharTrocas"
+          class="modal-close"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="exchange-source">
+
+          <span>
+            Divergência de origem
+          </span>
+
+          <strong id="trocaOrigemDescricao">
+            —
+          </strong>
+
+          <small id="trocaOrigemDetalhes">
+            —
+          </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="trocaBusca">
+            Pesquisar divergência de destino
+          </label>
+
+          <input
+            type="search"
+            id="trocaBusca"
+            placeholder="Código, descrição ou competência"
+          >
+
+        </div>
+
+
+        <div
+          id="trocaResultados"
+          class="selection-list"
+        >
+          <div class="empty-state compact">
+            <strong>Pesquise uma divergência</strong>
+
+            <span>
+              Os resultados aparecerão aqui.
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          id="btnCancelarTroca"
+          class="btn btn-secondary"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          id="btnConfirmarTroca"
+          class="btn btn-primary"
+          disabled
+        >
+          Vincular divergências
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MODAL CADASTRO RÁPIDO DE PRODUTO -->
+
+  <div
+    id="modalProdutoRapido"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalProdutoRapidoTitulo"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <div>
+          <span class="panel-eyebrow">
+            Cadastro
+          </span>
+
+          <h3 id="modalProdutoRapidoTitulo">
+            Cadastrar produto
+          </h3>
+        </div>
+
+        <button
+          type="button"
+          id="btnFecharProdutoRapido"
+          class="modal-close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="formProdutoRapido">
+
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="produtoRapidoCodigo">
+              Código
+            </label>
+
+            <input
+              type="text"
+              id="produtoRapidoCodigo"
+              required
+            >
+          </div>
+
+
+          <div class="form-group">
+            <label for="produtoRapidoDescricao">
+              Descrição
+            </label>
+
+            <input
+              type="text"
+              id="produtoRapidoDescricao"
+              required
+            >
+          </div>
+
+
+          <div class="form-group">
+            <label for="produtoRapidoSecao">
+              Seção
+            </label>
+
+            <input
+              type="text"
+              id="produtoRapidoSecao"
+              placeholder="Ex.: 1213 - AR CONDICIONADO"
+            >
+          </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+          <button
+            type="button"
+            id="btnCancelarProdutoRapido"
+            class="btn btn-secondary"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Cadastrar produto
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>

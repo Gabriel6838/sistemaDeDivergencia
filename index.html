@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="StockVision — Controle Inteligente de Divergências"
+  >
+
+  <title>StockVision — Controle de Divergências</title>
+
+
+  <!-- ========================================================
+       STOCKVISION — ESTILOS GLOBAIS
+       ======================================================== -->
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+
+
+  <!-- ========================================================
+       ESTILOS DAS PÁGINAS
+       ======================================================== -->
+
+  <link rel="stylesheet" href="./css/inicio.css">
+  <link rel="stylesheet" href="./css/divergencias.css">
+  <link rel="stylesheet" href="./css/produtos.css">
+  <link rel="stylesheet" href="./css/pesquisa.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
+  <link rel="stylesheet" href="./css/competencias.css">
+
+  <!-- Página de Trocas -->
+  <link rel="stylesheet" href="./css/trocas.css">
+
+</head>
+
+
+<body>
+
+  <!-- ========================================================
+       APLICAÇÃO
+       ======================================================== -->
+
+  <div id="app">
+
+
+    <!-- ======================================================
+         SIDEBAR
+         ====================================================== -->
+
+    <aside
+      id="sidebar"
+      class="sidebar"
+      aria-label="Menu principal"
+    >
+
+      <!-- ====================================================
+           MARCA
+           ==================================================== -->
+
+      <div class="sidebar-header">
+
+        <a
+          href="#inicio"
+          class="brand"
+          data-page="inicio"
+          aria-label="StockVision - Início"
+        >
+
+          <div class="brand-icon">
+            <span class="brand-icon-mark">SV</span>
+          </div>
+
+          <div class="brand-content">
+
+            <strong class="brand-name">
+              StockVision
+            </strong>
+
+            <span class="brand-subtitle">
+              Controle de Divergências
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- Fechar menu no mobile -->
+
+        <button
+          type="button"
+          id="sidebarClose"
+          class="sidebar-close"
+          aria-label="Fechar menu"
+        >
+
+          <span aria-hidden="true">
+            ×
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- ====================================================
+           COMPETÊNCIA ATUAL
+           ==================================================== -->
+
+      <div class="sidebar-competencia">
+
+        <div class="sidebar-competencia-label">
+          Competência atual
+        </div>
+
+        <div class="sidebar-competencia-content">
+
+          <div class="sidebar-competencia-icon">
+            <span id="sidebarCompetenciaIcon">
+              ●
+            </span>
+          </div>
+
+          <div class="sidebar-competencia-info">
+
+            <strong id="sidebarCompetencia">
+              —
+            </strong>
+
+            <span id="sidebarCompetenciaStatus">
+              Carregando...
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ====================================================
+           NAVEGAÇÃO
+           ==================================================== -->
+
+      <nav
+        class="sidebar-nav"
+        aria-label="Navegação principal"
+      >
+
+
+        <!-- ==================================================
+             PRINCIPAL
+             ================================================== -->
+
+        <div class="nav-section">
+
+          <span class="nav-section-title">
+            Principal
+          </span>
+
+
+          <!-- Início -->
+
+          <button
+            type="button"
+            class="nav-item active"
+            data-page="inicio"
+          >
+
+            <span
+              class="nav-icon"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path d="M3 13h8V3H3z"/>
+                <path d="M13 21h8v-8h-8z"/>
+                <path d="M13 3h8v6h-8z"/>
+                <path d="M3 17h8v4H3z"/>
+
+              </svg>
+
+            </span>
+
+            <span class="nav-label">
+              Início
+            </span>
+
+          </button>
+
+
+          <!-- Nova Divergência -->
+
+          <button
+            type="button"
+            class="nav-item"
+            data-page="nova-divergencia"
+          >
+
+            <span
+              class="nav-icon"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path d="M12 5v14"/>
+                <path d="M5 12h14"/>
+
+              </svg>
+
+            </span>
+
+            <span class="nav-label">
+              Nova Divergência
+            </span>
+
+          </button>
+
+
+          <!-- Pesquisa -->
+
+          <button
+            type="button"
+            class="nav-item"
+            data-page="pesquisa"
+          >
+
+            <span
+              class="nav-icon"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <circle
+                  cx="11"
+                  cy="11"
+                  r="7"
+                />
+
+                <path d="m20 20-4-4"/>
+
+              </svg>
+
+            </span>
+
+            <span class="nav-label">
+              Pesquisa
+            </span>
+
+          </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             GESTÃO
+             ================================================== -->
+
+        <div class="nav-section">
+
+          <span class="nav-section-title">
+            Gestão
+          </span>
+
+
+          <!-- Produtos -->
+
+          <button
+            type="button"
+            class="nav-item"
+            data-page="produtos"
+          >
+
+            <span
+              class="nav-icon"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path d="m21 8-9-5-9 5 9 5 9-5Z"/>
+                <path d="m3 8 9 5 9-5"/>
+                <path d="m3 12 9 5 9-5"/>
+                <path d="m3 16 9 5 9-5"/>
+
+              </svg>
+
+            </span>
+
+            <span class="nav-label">
+              Produtos
+            </span>
+
+          </button>
+
+
+          <!-- Trocas -->
+
+          <button
+            type="button"
+            class="nav-item"
+            data-page="trocas"
+          >
+
+            <span
+              class="nav-icon"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path d="M7 7h11l-3-3"/>
+                <path d="M18 7l-3 3"/>
+
+                <path d="M17 17H6l3 3"/>
+                <path d="M6 17l3-3"/>
+
+                <path d="M18 7a7 7 0 0 0-11.5-2"/>
+                <path d="M6 17a7 7 0 0 0 11.5 2"/>
+
+              </svg>
+
+            </span>
+
+            <span class="nav-label">
+              Trocas
+            </span>
+
+          </button>
+
+
+          <!-- Dashboard -->
+
+          <button
+            type="button"
+            class="nav-item"
+            data-page="dashboard"
+          >
+
+            <span
+              class="nav-icon"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path d="M4 19V5"/>
+                <path d="M4 19h16"/>
+                <path d="m7 15 4-5 3 3 5-7"/>
+
+              </svg>
+
+            </span>
+
+            <span class="nav-label">
+              Dashboard
+            </span>
+
+          </button>
+
+
+          <!-- Competências -->
+
+          <button
+            type="button"
+            class="nav-item"
+            data-page="competencias"
+          >
+
+            <span
+              class="nav-icon"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <rect
+                  x="3"
+                  y="4"
+                  width="18"
+                  height="17"
+                  rx="2"
+                />
+
+                <path d="M16 2v4"/>
+                <path d="M8 2v4"/>
+                <path d="M3 10h18"/>
+
+              </svg>
+
+            </span>
+
+            <span class="nav-label">
+              Competências
+            </span>
+
+          </button>
+
+        </div>
+
+      </nav>
+
+
+      <!-- ====================================================
+           RODAPÉ
+           ==================================================== -->
+
+      <div class="sidebar-footer">
+
+        <div class="system-status">
+
+          <span
+            class="system-status-dot"
+            aria-hidden="true"
+          ></span>
+
+          <span>
+            Sistema conectado
+          </span>
+
+        </div>
+
+        <span class="system-version">
+          StockVision v1.0
+        </span>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ======================================================
+         OVERLAY MOBILE
+         ====================================================== -->
+
+    <div
+      id="sidebarOverlay"
+      class="sidebar-overlay"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- ======================================================
+         CONTEÚDO PRINCIPAL
+         ====================================================== -->
+
+    <main
+      id="mainContent"
+      class="main-content"
+    >
+
+
+      <!-- ====================================================
+           TOPBAR
+           ==================================================== -->
+
+      <header class="topbar">
+
+
+        <!-- Esquerda -->
+
+        <div class="topbar-left">
+
+          <button
+            type="button"
+            id="menuToggle"
+            class="menu-toggle"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+          >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+          </button>
+
+
+          <div class="page-title-wrapper">
+
+            <span class="page-eyebrow">
+              StockVision
+            </span>
+
+            <h1 id="pageHeading">
+              Início
+            </h1>
+
+          </div>
+
+        </div>
+
+
+        <!-- Direita -->
+
+        <div class="topbar-right">
+
+          <div class="topbar-competencia">
+
+
+            <!-- Ícone -->
+
+            <div class="topbar-competencia-icon">
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+
+                <rect
+                  x="3"
+                  y="4"
+                  width="18"
+                  height="17"
+                  rx="2"
+                />
+
+                <path d="M16 2v4"/>
+                <path d="M8 2v4"/>
+                <path d="M3 10h18"/>
+
+              </svg>
+
+            </div>
+
+
+            <!-- Informação -->
+
+            <div class="topbar-competencia-info">
+
+              <span>
+                Competência
+              </span>
+
+              <strong id="topbarCompetencia">
+                —
+              </strong>
+
+            </div>
+
+
+            <!-- Status -->
+
+            <span
+              id="topbarCompetenciaStatus"
+              class="status-pill"
+            >
+              —
+            </span>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- ====================================================
+           CONTEÚDO DAS PÁGINAS
+           ==================================================== -->
+
+      <div
+        id="pageContent"
+        class="page-content"
+      >
+
+        <div
+          id="pageLoader"
+          class="page-loader"
+          aria-live="polite"
+        >
+
+          <div class="loader-spinner"></div>
+
+          <span>
+            Carregando StockVision...
+          </span>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- ========================================================
+       MODAL GLOBAL DE CONFIRMAÇÃO
+       ======================================================== -->
+
+  <div
+    id="modalConfirmacao"
+    class="modal-overlay"
+    hidden
+  >
+
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalConfirmacaoTitulo"
+    >
+
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="modal-eyebrow">
+            Confirmação
+          </span>
+
+          <h2 id="modalConfirmacaoTitulo">
+            Confirmar ação
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="btnFecharConfirmacao"
+          class="modal-close"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div
+        id="modalConfirmacaoMensagem"
+        class="modal-body"
+      >
+
+        Deseja realmente continuar?
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          id="btnCancelarConfirmacao"
+          class="btn btn-secondary"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          id="btnConfirmarAcao"
+          class="btn btn-primary"
+        >
+          Confirmar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       TOASTS
+       ======================================================== -->
+
+  <div
+    id="toastContainer"
+    class="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
+
+
+  <!-- ========================================================
+       BIBLIOTECAS
+       ======================================================== -->
+
+  <!-- jsPDF -->
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+  ></script>
+
+
+  <!-- Supabase -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+
+  <!-- ========================================================
+       STOCKVISION
+       ======================================================== -->
+
+  <script src="./supabase.js"></script>
+
+  <script src="./js/app.js"></script>
+
+</body>
+
+</html>

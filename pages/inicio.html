@@ -1,0 +1,635 @@
+<section
+  id="inicioPage"
+  class="page-section inicio-page"
+  aria-labelledby="inicioTitulo"
+>
+
+  <!-- ======================================================
+       CABEÇALHO
+       ====================================================== -->
+
+  <header class="page-header inicio-header">
+
+
+<div class="page-header-content">
+
+  <span class="page-eyebrow">
+    Visão geral
+  </span>
+
+  <h2 id="inicioTitulo">
+    Início
+  </h2>
+
+  <p>
+    Acompanhe as divergências e o andamento da competência atual.
+  </p>
+
+</div>
+
+<div class="page-header-actions">
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-page="nova-divergencia"
+  >
+
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="M12 5v14"/>
+      <path d="M5 12h14"/>
+    </svg>
+
+    <span>Nova divergência</span>
+
+  </button>
+
+</div>
+
+
+  </header>
+
+  <!-- ======================================================
+       RESUMO DA COMPETÊNCIA
+       ====================================================== -->
+
+  <section
+    class="inicio-stats stats-grid"
+    aria-label="Resumo da competência atual"
+  >
+
+
+<!-- DIVERGÊNCIAS -->
+
+<article class="stat-card inicio-stat-card">
+
+  <div class="stat-card-top">
+
+    <div class="stat-icon stat-icon-primary">
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/>
+        <path d="M12 12 4 7"/>
+        <path d="m12 12 8-5"/>
+        <path d="M12 12v9"/>
+      </svg>
+
+    </div>
+
+    <span class="stat-card-index">
+      01
+    </span>
+
+  </div>
+
+  <div class="stat-card-content">
+
+    <span class="stat-label">
+      Divergências
+    </span>
+
+    <strong
+      id="inicioTotalDivergencias"
+      class="stat-value"
+    >
+      0
+    </strong>
+
+    <span class="stat-description">
+      registros na competência
+    </span>
+
+  </div>
+
+</article>
+
+
+<!-- FALTAS -->
+
+<article class="stat-card inicio-stat-card">
+
+  <div class="stat-card-top">
+
+    <div class="stat-icon stat-icon-danger">
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M12 5v14"/>
+        <path d="m6 13 6 6 6-6"/>
+      </svg>
+
+    </div>
+
+    <span class="stat-card-index">
+      02
+    </span>
+
+  </div>
+
+  <div class="stat-card-content">
+
+    <span class="stat-label">
+      Faltas
+    </span>
+
+    <strong
+      id="inicioTotalFaltas"
+      class="stat-value stat-value-danger"
+    >
+      R$ 0,00
+    </strong>
+
+    <span class="stat-description">
+      valor das faltas
+    </span>
+
+  </div>
+
+</article>
+
+
+<!-- SOBRAS -->
+
+<article class="stat-card inicio-stat-card">
+
+  <div class="stat-card-top">
+
+    <div class="stat-icon stat-icon-success">
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M12 19V5"/>
+        <path d="m6 11 6-6 6 6"/>
+      </svg>
+
+    </div>
+
+    <span class="stat-card-index">
+      03
+    </span>
+
+  </div>
+
+  <div class="stat-card-content">
+
+    <span class="stat-label">
+      Sobras
+    </span>
+
+    <strong
+      id="inicioTotalSobras"
+      class="stat-value stat-value-success"
+    >
+      R$ 0,00
+    </strong>
+
+    <span class="stat-description">
+      valor das sobras
+    </span>
+
+  </div>
+
+</article>
+
+
+<!-- SALDO -->
+
+<article class="stat-card inicio-stat-card">
+
+  <div class="stat-card-top">
+
+    <div class="stat-icon stat-icon-warning">
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M12 3v18"/>
+        <path d="M17 7H9.5a3.5 3.5 0 0 0 0 7H15a3.5 3.5 0 0 1 0 7H7"/>
+      </svg>
+
+    </div>
+
+    <span class="stat-card-index">
+      04
+    </span>
+
+  </div>
+
+  <div class="stat-card-content">
+
+    <span class="stat-label">
+      Saldo da divergência
+    </span>
+
+    <strong
+      id="inicioSaldoDivergencia"
+      class="stat-value"
+    >
+      R$ 0,00
+    </strong>
+
+    <span class="stat-description">
+      resultado entre faltas e sobras
+    </span>
+
+  </div>
+
+</article>
+
+
+  </section>
+
+  <!-- ======================================================
+       ÁREA PRINCIPAL
+       ====================================================== -->
+
+  <div class="inicio-main-grid content-grid content-grid-main">
+
+
+<!-- ====================================================
+     ÚLTIMAS DIVERGÊNCIAS
+     ==================================================== -->
+
+<section
+  class="panel panel-table inicio-divergencias-panel"
+  aria-labelledby="inicioDivergenciasTitulo"
+>
+
+  <div class="panel-header">
+
+    <div class="panel-heading">
+
+      <span class="panel-eyebrow">
+        Movimentações recentes
+      </span>
+
+      <h3 id="inicioDivergenciasTitulo">
+        Últimas divergências
+      </h3>
+
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-ghost"
+      data-page="pesquisa"
+    >
+
+      <span>
+        Ver todas
+      </span>
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14"/>
+        <path d="m13 6 6 6-6 6"/>
+      </svg>
+
+    </button>
+
+  </div>
+
+
+  <div class="table-wrapper inicio-table-wrapper">
+
+    <table class="data-table inicio-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Produto
+          </th>
+
+          <th>
+            Seção
+          </th>
+
+          <th>
+            Divergência
+          </th>
+
+          <th>
+            Valor
+          </th>
+
+          <th>
+            Status
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="inicioTabelaDivergencias">
+
+        <tr>
+
+          <td
+            colspan="5"
+            class="table-empty"
+          >
+
+            <div class="empty-state inicio-empty-state">
+
+              <div class="empty-state-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path d="M4 4h16v16H4z"/>
+                  <path d="M8 9h8"/>
+                  <path d="M8 13h5"/>
+                  <path d="M8 17h3"/>
+                </svg>
+
+              </div>
+
+              <strong>
+                Nenhuma divergência registrada
+              </strong>
+
+              <span>
+                Os registros da competência atual aparecerão aqui.
+              </span>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- ====================================================
+     COMPETÊNCIA ATUAL
+     ==================================================== -->
+
+<aside
+  class="panel panel-summary inicio-competencia-panel"
+  aria-labelledby="inicioCompetenciaTitulo"
+>
+
+  <div class="panel-header">
+
+    <div class="panel-heading">
+
+      <span class="panel-eyebrow">
+        Competência atual
+      </span>
+
+      <h3 id="inicioCompetenciaTitulo">
+        09/2026
+      </h3>
+
+    </div>
+
+  </div>
+
+
+  <div class="competencia-summary">
+
+
+    <!-- STATUS -->
+
+    <div class="competencia-status-card">
+
+      <div class="summary-info">
+
+        <span class="summary-label">
+          Status
+        </span>
+
+        <span class="summary-description">
+          Situação da competência
+        </span>
+
+      </div>
+
+      <span
+        id="inicioCompetenciaStatus"
+        class="status-pill status-open"
+      >
+        Aberta
+      </span>
+
+    </div>
+
+
+    <div class="summary-divider"></div>
+
+
+    <!-- REGISTROS -->
+
+    <div class="summary-row">
+
+      <span>
+        Total de registros
+      </span>
+
+      <strong id="inicioResumoRegistros">
+        0
+      </strong>
+
+    </div>
+
+
+    <!-- FALTAS -->
+
+    <div class="summary-row">
+
+      <span>
+        Faltas
+      </span>
+
+      <strong
+        id="inicioResumoFaltas"
+        class="text-danger"
+      >
+        R$ 0,00
+      </strong>
+
+    </div>
+
+
+    <!-- SOBRAS -->
+
+    <div class="summary-row">
+
+      <span>
+        Sobras
+      </span>
+
+      <strong
+        id="inicioResumoSobras"
+        class="text-success"
+      >
+        R$ 0,00
+      </strong>
+
+    </div>
+
+
+    <!-- SALDO -->
+
+    <div class="summary-row summary-row-total">
+
+      <span>
+        Saldo
+      </span>
+
+      <strong id="inicioResumoSaldo">
+        R$ 0,00
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <div class="summary-footer">
+
+    <button
+      type="button"
+      class="btn btn-secondary btn-block"
+      data-page="competencias"
+    >
+
+      <span>
+        Gerenciar competências
+      </span>
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14"/>
+        <path d="m13 6 6 6-6 6"/>
+      </svg>
+
+    </button>
+
+  </div>
+
+</aside>
+
+
+  </div>
+
+  <!-- ======================================================
+       ALERTA — SEM COMPETÊNCIA ABERTA
+       ====================================================== -->
+
+  <section
+    id="inicioAlertaCompetencia"
+    class="alert-card inicio-alerta"
+    hidden
+    role="alert"
+  >
+
+
+<div class="alert-icon">
+
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path d="M12 9v4"/>
+    <path d="M12 17h.01"/>
+    <path
+      d="M10.3 3.7 2.9 17a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.7 3.7a2 2 0 0 0-3.4 0Z"
+    />
+  </svg>
+
+</div>
+
+
+<div class="alert-content">
+
+  <strong>
+    Nenhuma competência aberta
+  </strong>
+
+  <p>
+    Abra uma competência para começar a registrar divergências.
+  </p>
+
+</div>
+
+
+<button
+  type="button"
+  class="btn btn-primary"
+  data-page="competencias"
+>
+
+  <span>
+    Gerenciar competências
+  </span>
+
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14"/>
+    <path d="m13 6 6 6-6 6"/>
+  </svg>
+
+</button>
+
+
+  </section>
+
+</section>

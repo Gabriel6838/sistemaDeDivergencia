@@ -1,0 +1,301 @@
+<section
+  id="produtosPage"
+  class="page-section"
+  aria-labelledby="produtosTitulo"
+>
+
+  <div class="page-header">
+
+
+<div>
+  <span class="page-eyebrow">
+    Cadastro
+  </span>
+
+  <h2 id="produtosTitulo">
+    Produtos
+  </h2>
+
+  <p>
+    Gerencie a base de produtos utilizada nas conferências.
+  </p>
+</div>
+
+<button
+  type="button"
+  id="btnNovoProduto"
+  class="btn btn-primary"
+  onclick="window.StockVisionProdutos && window.StockVisionProdutos.abrirModal()"
+>
+  + Novo produto
+</button>
+
+
+  </div>
+
+  <section class="panel">
+
+
+<div class="panel-header">
+
+  <div>
+    <span class="panel-eyebrow">
+      Base de produtos
+    </span>
+
+    <h3>
+      Produtos cadastrados
+    </h3>
+  </div>
+
+  <span
+    id="produtosQuantidade"
+    class="status-pill status-info"
+  >
+    0 produtos
+  </span>
+
+</div>
+
+<div class="filters-bar">
+
+  <div class="filter-search">
+
+    <label for="produtoPesquisa">
+      Pesquisar
+    </label>
+
+    <input
+      type="search"
+      id="produtoPesquisa"
+      placeholder="Código ou descrição..."
+      autocomplete="off"
+    >
+
+  </div>
+
+  <div class="filter-field">
+
+    <label for="produtoSecaoFiltro">
+      Seção
+    </label>
+
+    <select id="produtoSecaoFiltro">
+
+      <option value="">
+        Todas as seções
+      </option>
+
+    </select>
+
+  </div>
+
+</div>
+
+<div class="table-wrapper">
+
+  <table class="data-table">
+
+    <thead>
+
+      <tr>
+        <th>Código</th>
+        <th>Descrição</th>
+        <th>Seção</th>
+        <th>Cadastrado em</th>
+        <th class="text-right">Ações</th>
+      </tr>
+
+    </thead>
+
+    <tbody id="produtosTabela">
+
+      <tr>
+        <td colspan="5">
+
+          <div class="empty-state">
+
+            <strong>
+              Carregando produtos...
+            </strong>
+
+          </div>
+
+        </td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+
+  </section>
+
+  <div
+    id="modalProduto"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalProdutoTitulo"
+    aria-hidden="true"
+  >
+
+
+<div
+  class="modal produto-modal"
+  role="document"
+  onclick="event.stopPropagation()"
+>
+
+  <div class="modal-header">
+
+    <div>
+
+      <span class="panel-eyebrow">
+        Cadastro
+      </span>
+
+      <h3 id="modalProdutoTitulo">
+        Novo produto
+      </h3>
+
+    </div>
+
+    <button
+      type="button"
+      id="btnFecharProduto"
+      class="modal-close"
+      aria-label="Fechar"
+      onclick="window.StockVisionProdutos && window.StockVisionProdutos.fecharModal()"
+    >
+      ×
+    </button>
+
+  </div>
+
+  <form id="formProduto">
+
+    <input
+      type="hidden"
+      id="produtoId"
+    >
+
+    <div class="modal-body">
+
+      <div class="form-group">
+
+        <label for="produtoCodigo">
+          Código
+        </label>
+
+        <input
+          type="text"
+          id="produtoCodigo"
+          required
+          autocomplete="off"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="produtoDescricao">
+          Descrição
+        </label>
+
+        <input
+          type="text"
+          id="produtoDescricao"
+          required
+          autocomplete="off"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="produtoSecao">
+          Seção
+        </label>
+
+        <select
+          id="produtoSecao"
+          required
+        >
+
+          <option value="">
+            Selecione uma seção
+          </option>
+
+          <option value="1213 - AR CONDICIONADO">1213 - AR CONDICIONADO</option>
+          <option value="150 - BAZAR ELETRO">150 - BAZAR ELETRO</option>
+          <option value="113 - BEBEDOUROS">113 - BEBEDOUROS</option>
+          <option value="110 - BIKES">110 - BIKES</option>
+          <option value="1161 - CELULAR">1161 - CELULAR</option>
+          <option value="1610 - CLIMATIZADORES">1610 - CLIMATIZADORES</option>
+          <option value="1341 - COZINHAS">1341 - COZINHAS</option>
+          <option value="1285 - CUIDADOS PESSOAIS">1285 - CUIDADOS PESSOAIS</option>
+          <option value="1340 - DORMITORIOS">1340 - DORMITORIOS</option>
+          <option value="1344 - ESTOFADOS">1344 - ESTOFADOS</option>
+          <option value="108 - FOGAO">108 - FOGAO</option>
+          <option value="1224 - FORNOS">1224 - FORNOS</option>
+          <option value="1225 - FREEZERS">1225 - FREEZERS</option>
+          <option value="1617 - FRITADEIRAS">1617 - FRITADEIRAS</option>
+          <option value="1348 - HOME OFFICE">1348 - HOME OFFICE</option>
+          <option value="1280 - IMPORTACAO MOVEIS">1280 - IMPORTACAO MOVEIS</option>
+          <option value="111 - INFORMATICA">111 - INFORMATICA</option>
+          <option value="1176 - INFORMATICA INCLUSAO DIGITAL">1176 - INFORMATICA INCLUSAO DIGITAL</option>
+          <option value="112 - LAVADORAS">112 - LAVADORAS</option>
+          <option value="1616 - LIQUIDIFICADORES">1616 - LIQUIDIFICADORES</option>
+          <option value="1342 - MESAS">1342 - MESAS</option>
+          <option value="102 - PORTATEIS">102 - PORTATEIS</option>
+          <option value="1346 - RACKS">1346 - RACKS</option>
+          <option value="107 - REFRIGERADORES">107 - REFRIGERADORES</option>
+          <option value="140 - RELOGIOS">140 - RELOGIOS</option>
+          <option value="1347 - ROUPEIROS">1347 - ROUPEIROS</option>
+          <option value="1345 - SALAS">1345 - SALAS</option>
+          <option value="1233 - SMARTPHONES INCLUSAO DIGITAL">1233 - SMARTPHONES INCLUSAO DIGITAL</option>
+          <option value="208 - SMARTWATCH">208 - SMARTWATCH</option>
+          <option value="106 - SOM">106 - SOM</option>
+          <option value="1511 - TABLETS">1511 - TABLETS</option>
+          <option value="81 - TELEVISORES">81 - TELEVISORES</option>
+          <option value="1343 - UTILIDADES">1343 - UTILIDADES</option>
+          <option value="139 - VENTILADORES">139 - VENTILADORES</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+        id="btnCancelarProduto"
+        class="btn btn-secondary"
+        onclick="window.StockVisionProdutos && window.StockVisionProdutos.fecharModal()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        id="btnSalvarProduto"
+        class="btn btn-primary"
+      >
+        Salvar produto
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
+
+
+  </div>
+
+</section>

@@ -1,0 +1,334 @@
+<section id="trocasPage" class="trocas-page">
+
+  <header class="page-header">
+    <div class="page-header-content">
+      <div>
+        <span class="page-eyebrow">GESTÃO DE DIVERGÊNCIAS</span>
+        <h1 class="page-title">Trocas</h1>
+        <p class="page-description">
+          Relacione duas divergências da competência atual para registrar uma troca.
+        </p>
+      </div>
+
+      <div class="trocas-competencia-card">
+        <span class="trocas-competencia-label">Competência atual</span>
+        <strong id="trocasCompetenciaAtual" class="trocas-competencia-value">
+          Carregando...
+        </strong>
+      </div>
+    </div>
+  </header>
+
+  <main class="trocas-content">
+
+    <!-- FLUXO -->
+    <section class="trocas-workflow">
+
+      <!-- PRIMEIRA DIVERGÊNCIA -->
+      <article class="troca-step">
+
+        <div class="troca-step-header">
+          <div class="troca-step-number">01</div>
+
+          <div>
+            <h2 class="troca-step-heading">Primeira divergência</h2>
+            <p class="troca-step-description">
+              Selecione a primeira ocorrência que fará parte da troca.
+            </p>
+          </div>
+        </div>
+
+        <div class="troca-search-wrapper">
+          <div class="troca-search-box">
+            <span class="troca-search-icon">⌕</span>
+
+            <input
+              type="search"
+              id="buscaDivergenciaOrigem"
+              class="trocas-search-input"
+              placeholder="Buscar por código, produto ou seção..."
+              autocomplete="off"
+            >
+          </div>
+
+          <span class="troca-search-hint">
+            Pesquise entre as divergências da competência atual.
+          </span>
+        </div>
+
+        <div
+          id="resultadosDivergenciaOrigem"
+          class="trocas-results"
+        ></div>
+
+        <div
+          id="divergenciaOrigemSelecionada"
+          class="troca-selected-container"
+        ></div>
+
+      </article>
+
+
+      <div class="troca-flow-indicator">
+        <div class="troca-flow-line"></div>
+        <div class="troca-flow-icon">↓</div>
+        <div class="troca-flow-line"></div>
+      </div>
+
+
+      <!-- SEGUNDA DIVERGÊNCIA -->
+      <article class="troca-step">
+
+        <div class="troca-step-header">
+          <div class="troca-step-number">02</div>
+
+          <div>
+            <h2 class="troca-step-heading">Divergência relacionada</h2>
+            <p class="troca-step-description">
+              Selecione outra divergência para relacionar com a primeira.
+            </p>
+          </div>
+        </div>
+
+        <div
+          id="avisoSelecionarOrigem"
+          class="troca-info-message"
+        >
+          Primeiro selecione a primeira divergência para liberar esta pesquisa.
+        </div>
+
+        <div
+          id="buscaDestinoContainer"
+          class="troca-search-wrapper hidden"
+        >
+          <div class="troca-search-box">
+            <span class="troca-search-icon">⌕</span>
+
+            <input
+              type="search"
+              id="buscaDivergenciaDestino"
+              class="trocas-search-input"
+              placeholder="Buscar outra divergência..."
+              autocomplete="off"
+            >
+          </div>
+
+          <span class="troca-search-hint">
+            A divergência do mesmo produto não pode ser relacionada.
+          </span>
+        </div>
+
+        <div
+          id="resultadosDivergenciaDestino"
+          class="trocas-results"
+        ></div>
+
+        <div
+          id="divergenciaDestinoSelecionada"
+          class="troca-selected-container"
+        ></div>
+
+      </article>
+
+    </section>
+
+
+    <!-- PREVIEW -->
+    <section
+      id="trocaPreviewSection"
+      class="troca-preview-section hidden"
+    >
+
+      <div class="section-heading">
+        <span class="section-eyebrow">CONFERÊNCIA</span>
+        <h2>Resumo da troca</h2>
+        <p>Confira as duas divergências antes de registrar.</p>
+      </div>
+
+      <div class="troca-preview-grid">
+
+        <div
+          id="trocaPreviewOrigem"
+          class="troca-preview-card"
+        ></div>
+
+        <div class="troca-preview-arrow">
+          <span>⇄</span>
+        </div>
+
+        <div
+          id="trocaPreviewDestino"
+          class="troca-preview-card"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- OBSERVAÇÃO -->
+    <section
+      id="trocaObservacaoSection"
+      class="troca-observacao-section hidden"
+    >
+
+      <div class="section-heading">
+        <span class="section-eyebrow">REGISTRO</span>
+        <h2>Observação</h2>
+        <p>Adicione uma informação complementar, se necessário.</p>
+      </div>
+
+      <div class="troca-observacao-wrapper">
+
+        <textarea
+          id="trocaObservacao"
+          class="troca-observacao"
+          maxlength="500"
+          rows="4"
+          placeholder="Ex.: Troca identificada durante a conferência física..."
+        ></textarea>
+
+        <div class="troca-observacao-footer">
+          <span>
+            Opcional
+          </span>
+
+          <span id="trocaObservacaoContador">
+            0/500
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- AÇÕES -->
+    <section
+      id="trocaActions"
+      class="troca-actions hidden"
+    >
+
+      <button
+        type="button"
+        id="btnLimparTroca"
+        class="btn btn-secondary"
+      >
+        Limpar
+      </button>
+
+      <button
+        type="button"
+        id="btnSalvarTroca"
+        class="btn btn-primary"
+      >
+        Confirmar troca
+      </button>
+
+    </section>
+
+
+    <!-- HISTÓRICO -->
+    <section class="trocas-history-section">
+
+      <div class="trocas-history-header">
+
+        <div>
+          <span class="section-eyebrow">REGISTROS</span>
+          <h2>Histórico de trocas</h2>
+          <p>Trocas registradas na competência atual.</p>
+        </div>
+
+        <button
+          type="button"
+          id="btnAtualizarHistoricoTrocas"
+          class="btn btn-secondary btn-small"
+        >
+          Atualizar
+        </button>
+
+      </div>
+
+      <div
+        id="trocasListaHistorico"
+        class="trocas-lista"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- MODAL DE CONFIRMAÇÃO -->
+  <div
+    id="modalConfirmarTroca"
+    class="troca-modal hidden"
+    aria-hidden="true"
+  >
+
+    <div
+      class="troca-modal-overlay"
+      data-close-modal="true"
+    ></div>
+
+    <div
+      class="troca-modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="tituloModalConfirmarTroca"
+    >
+
+      <div class="troca-modal-header">
+
+        <div class="troca-modal-icon">
+          ⇄
+        </div>
+
+        <div class="troca-modal-heading">
+          <span>CONFIRMAÇÃO</span>
+          <h3 id="tituloModalConfirmarTroca">
+            Confirmar troca
+          </h3>
+        </div>
+
+        <button
+          type="button"
+          id="btnFecharModalTroca"
+          class="troca-modal-close"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div
+        id="modalConfirmarTrocaConteudo"
+        class="troca-modal-body"
+      ></div>
+
+      <div class="troca-modal-footer">
+
+        <button
+          type="button"
+          id="btnCancelarModalTroca"
+          class="btn btn-secondary"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          id="btnConfirmarModalTroca"
+          class="btn btn-primary"
+        >
+          Confirmar troca
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

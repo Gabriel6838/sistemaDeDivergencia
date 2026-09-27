@@ -1,0 +1,859 @@
+/* ============================================================
+STOCKVISION — NOVA DIVERGÊNCIA
+============================================================ */
+
+#novaDivergenciaPage {
+width: 100%;
+min-width: 0;
+}
+
+/* ============================================================
+CABEÇALHO
+============================================================ */
+
+#novaDivergenciaPage > .page-header {
+margin-bottom: 22px;
+}
+
+#novaDivergenciaPage .page-header h2 {
+margin: 5px 0 7px;
+font-size: 25px;
+line-height: 1.2;
+font-weight: 800;
+color: var(--text);
+}
+
+#novaDivergenciaPage .page-header p {
+max-width: 680px;
+margin: 0;
+font-size: 13px;
+line-height: 1.55;
+color: var(--text-muted);
+}
+
+/* ============================================================
+ALERTA
+============================================================ */
+
+#novaDivergenciaAlerta {
+margin-bottom: 18px;
+}
+
+#novaDivergenciaAlerta:not(.hidden) {
+display: flex;
+align-items: center;
+gap: 13px;
+}
+
+#novaDivergenciaAlerta .alert-icon {
+flex: 0 0 34px;
+width: 34px;
+height: 34px;
+display: grid;
+place-items: center;
+border-radius: 50%;
+font-size: 14px;
+font-weight: 800;
+}
+
+#novaDivergenciaAlerta > div:nth-child(2) {
+flex: 1;
+min-width: 0;
+}
+
+#novaDivergenciaAlerta strong {
+display: block;
+font-size: 13px;
+color: var(--text);
+}
+
+#novaDivergenciaAlerta p {
+margin: 3px 0 0;
+font-size: 11px;
+line-height: 1.45;
+color: var(--text-muted);
+}
+
+/* ============================================================
+LAYOUT
+============================================================ */
+
+.form-layout {
+display: grid;
+grid-template-columns: minmax(0, 1fr) 320px;
+gap: 20px;
+align-items: start;
+}
+
+/* ============================================================
+PAINEL PRINCIPAL
+============================================================ */
+
+.form-layout > .panel:first-child {
+min-width: 0;
+  padding: 22px;
+}
+
+.form-layout > .panel:first-child > .panel-header {
+padding-bottom: 18px;
+margin-bottom: 20px;
+border-bottom: 1px solid var(--border-light);
+}
+
+.form-layout > .panel:first-child > .panel-header h3,
+.panel-side h3 {
+margin: 3px 0 0;
+font-size: 16px;
+font-weight: 800;
+color: var(--text);
+}
+
+.form-layout > .panel:first-child > .panel-header {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 15px;
+}
+
+/* ============================================================
+COMPETÊNCIA
+============================================================ */
+
+#novaDivergenciaCompetencia {
+flex: 0 0 auto;
+white-space: nowrap;
+}
+
+/* ============================================================
+FORMULÁRIO
+============================================================ */
+
+#formNovaDivergencia {
+width: 100%;
+}
+
+#formNovaDivergencia.form-disabled {
+opacity: 0.55;
+pointer-events: none;
+user-select: none;
+}
+
+.form-grid {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 18px;
+}
+
+.form-group {
+min-width: 0;
+display: flex;
+flex-direction: column;
+gap: 7px;
+}
+
+.form-group-wide,
+.form-group-full {
+grid-column: 1 / -1;
+}
+
+.form-group label {
+font-size: 12px;
+line-height: 1.3;
+font-weight: 700;
+color: var(--text-secondary);
+}
+
+.form-group small {
+font-size: 10px;
+line-height: 1.45;
+color: var(--text-light);
+}
+
+/* ============================================================
+INPUTS
+============================================================ */
+
+#novaDivergenciaPage input,
+#novaDivergenciaPage textarea {
+width: 100%;
+border: 1px solid var(--border);
+border-radius: 9px;
+outline: none;
+background: var(--surface);
+color: var(--text);
+font: inherit;
+transition:
+border-color var(--transition),
+box-shadow var(--transition),
+background var(--transition);
+}
+
+#novaDivergenciaPage input {
+min-height: 43px;
+padding: 0 12px;
+}
+
+#novaDivergenciaPage textarea {
+min-height: 105px;
+padding: 11px 12px;
+resize: vertical;
+line-height: 1.5;
+}
+
+#novaDivergenciaPage input::placeholder,
+#novaDivergenciaPage textarea::placeholder {
+color: var(--text-light);
+}
+
+#novaDivergenciaPage input:hover,
+#novaDivergenciaPage textarea:hover {
+border-color: #cbd5e1;
+}
+
+#novaDivergenciaPage input:focus,
+#novaDivergenciaPage textarea:focus {
+border-color: var(--primary);
+box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+/* ============================================================
+BUSCA DE PRODUTO
+============================================================ */
+
+.input-action {
+display: flex;
+gap: 9px;
+}
+
+.input-action input {
+flex: 1;
+min-width: 0;
+}
+
+.input-action .btn {
+flex: 0 0 auto;
+min-width: 88px;
+}
+
+/* ============================================================
+PREÇO
+============================================================ */
+
+.input-money {
+position: relative;
+display: flex;
+align-items: center;
+}
+
+.input-money > span {
+position: absolute;
+left: 12px;
+z-index: 1;
+color: var(--text-muted);
+font-size: 12px;
+font-weight: 700;
+pointer-events: none;
+}
+
+.input-money input {
+padding-left: 36px !important;
+}
+
+/* ============================================================
+PRODUTO ENCONTRADO
+============================================================ */
+
+.product-preview {
+grid-column: 1 / -1;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 18px;
+padding: 16px 17px;
+border: 1px solid #bfdbfe;
+border-radius: 12px;
+background: linear-gradient(
+135deg,
+#eff6ff,
+#f8fbff
+);
+}
+
+.product-preview-main {
+min-width: 0;
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+
+.product-preview-label {
+font-size: 10px;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+color: var(--primary);
+}
+
+.product-preview-main strong {
+overflow: hidden;
+font-size: 14px;
+line-height: 1.35;
+color: var(--text);
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.product-preview-main span:last-child {
+font-size: 11px;
+color: var(--text-muted);
+}
+
+.product-preview-section {
+flex: 0 0 auto;
+display: flex;
+flex-direction: column;
+gap: 4px;
+padding: 8px 11px;
+border: 1px solid #dbeafe;
+border-radius: 9px;
+background: #ffffff;
+text-align: right;
+}
+
+.product-preview-section span {
+font-size: 9px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+color: var(--text-light);
+}
+
+.product-preview-section strong {
+font-size: 11px;
+color: var(--primary);
+}
+
+/* ============================================================
+PRODUTO NÃO ENCONTRADO
+============================================================ */
+
+.empty-inline {
+grid-column: 1 / -1;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 15px;
+padding: 15px 17px;
+border: 1px dashed #cbd5e1;
+border-radius: 12px;
+background: #f8fafc;
+}
+
+.empty-inline > div {
+min-width: 0;
+flex: 1;
+}
+
+.empty-inline strong {
+display: block;
+font-size: 12px;
+color: var(--text);
+}
+
+.empty-inline p {
+margin: 3px 0 0;
+font-size: 10px;
+line-height: 1.45;
+color: var(--text-muted);
+}
+
+/* ============================================================
+CÁLCULOS
+============================================================ */
+
+.calculation-box {
+min-height: 43px;
+display: flex;
+align-items: center;
+padding: 0 13px;
+border: 1px solid var(--border);
+border-radius: 9px;
+background: #f8fafc;
+color: var(--text);
+font-size: 13px;
+font-weight: 800;
+}
+
+.calculation-positive {
+border-color: #bbf7d0;
+background: var(--success-light);
+color: var(--success);
+}
+
+.calculation-negative {
+border-color: #fecaca;
+background: var(--danger-light);
+color: var(--danger);
+}
+
+/* ============================================================
+RODAPÉ DO FORMULÁRIO
+============================================================ */
+
+.form-footer {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 9px;
+margin-top: 22px;
+padding-top: 19px;
+border-top: 1px solid var(--border-light);
+}
+
+/* ============================================================
+PAINEL LATERAL
+============================================================ */
+
+.panel-side {
+min-width: 0;
+overflow: hidden;
+}
+
+.panel-side > .panel-header {
+padding-bottom: 16px;
+margin-bottom: 0;
+border-bottom: 1px solid var(--border-light);
+}
+
+.result-summary {
+padding: 4px 20px 18px;
+}
+
+.result-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 15px;
+min-height: 43px;
+border-bottom: 1px solid var(--border-light);
+}
+
+.result-row:last-child {
+border-bottom: 0;
+}
+
+.result-row span {
+font-size: 11px;
+color: var(--text-muted);
+}
+
+.result-row strong {
+max-width: 175px;
+overflow: hidden;
+text-align: right;
+font-size: 12px;
+color: var(--text);
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.result-row-total {
+margin-top: 5px;
+padding-top: 6px;
+border-bottom: 0;
+}
+
+.result-row-total span {
+font-size: 12px;
+font-weight: 700;
+color: var(--text-secondary);
+}
+
+.result-row-total strong {
+font-size: 17px;
+color: var(--primary);
+}
+
+/* ============================================================
+INFORMAÇÃO LATERAL
+============================================================ */
+
+.side-info {
+margin: 0 20px 20px;
+padding: 14px;
+border: 1px solid var(--border-light);
+border-radius: 10px;
+background: #f8fafc;
+}
+
+.side-info strong {
+display: block;
+margin-bottom: 7px;
+font-size: 11px;
+color: var(--text);
+}
+
+.side-info p {
+margin: 0 0 6px;
+font-size: 10px;
+line-height: 1.5;
+color: var(--text-muted);
+}
+
+.side-info p:last-child {
+margin-bottom: 0;
+}
+
+/* ============================================================
+ÁREA DE TROCA APÓS O REGISTRO
+============================================================ */
+
+.divergencia-troca-card {
+grid-column: 1 / -1;
+display: none;
+align-items: center;
+justify-content: space-between;
+gap: 18px;
+padding: 16px 17px;
+border: 1px solid #dbeafe;
+border-radius: 12px;
+background: #f8fbff;
+}
+
+.divergencia-troca-card.is-visible {
+display: flex;
+}
+
+.divergencia-troca-card-content {
+min-width: 0;
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+
+.divergencia-troca-card-eyebrow {
+font-size: 9px;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+color: var(--primary);
+}
+
+.divergencia-troca-card-content strong {
+font-size: 13px;
+color: var(--text);
+}
+
+.divergencia-troca-card-content span {
+font-size: 10px;
+line-height: 1.45;
+color: var(--text-muted);
+}
+
+.divergencia-troca-card .btn {
+flex: 0 0 auto;
+}
+
+/* ============================================================
+MODAIS DESTA PÁGINA
+============================================================ */
+
+#modalProdutoRapido,
+#modalTrocas {
+z-index: 3100;
+}
+
+#modalProdutoRapido .modal {
+width: min(520px, calc(100vw - 32px));
+}
+
+#modalTrocas .modal {
+width: min(820px, calc(100vw - 32px));
+}
+
+/* ============================================================
+MODAL — TROCA
+============================================================ */
+
+#modalTrocas .modal-header p {
+margin: 5px 0 0;
+font-size: 11px;
+line-height: 1.45;
+color: var(--text-muted);
+}
+
+.exchange-source {
+display: flex;
+flex-direction: column;
+gap: 5px;
+margin-bottom: 20px;
+padding: 15px;
+border: 1px solid #dbeafe;
+border-radius: 11px;
+background: var(--primary-light);
+}
+
+.exchange-source > span {
+font-size: 9px;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: 0.05em;
+color: var(--primary);
+}
+
+.exchange-source > strong {
+font-size: 14px;
+color: var(--text);
+}
+
+.exchange-source > small {
+font-size: 11px;
+color: var(--text-muted);
+}
+
+/* ============================================================
+LISTA DE DIVERGÊNCIAS PARA TROCA
+============================================================ */
+
+.selection-list {
+display: flex;
+flex-direction: column;
+gap: 8px;
+max-height: 370px;
+margin-top: 10px;
+overflow-y: auto;
+padding-right: 3px;
+}
+
+.selection-item {
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 18px;
+padding: 13px 15px;
+border: 1px solid var(--border);
+border-radius: 10px;
+background: #ffffff;
+color: var(--text);
+text-align: left;
+cursor: pointer;
+transition:
+border-color var(--transition),
+background var(--transition),
+box-shadow var(--transition),
+transform var(--transition);
+}
+
+.selection-item:hover {
+border-color: #bfdbfe;
+background: #f8fbff;
+transform: translateY(-1px);
+}
+
+.selection-item.selected {
+border-color: var(--primary);
+background: var(--primary-light);
+box-shadow:
+0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.selection-item > div:first-child {
+min-width: 0;
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+
+.selection-item strong {
+overflow: hidden;
+font-size: 13px;
+color: var(--text);
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.selection-item span {
+font-size: 10px;
+color: var(--text-muted);
+}
+
+.selection-item > div:last-child {
+flex: 0 0 auto;
+font-size: 12px;
+font-weight: 800;
+}
+
+.selection-item .text-danger {
+color: var(--danger);
+}
+
+.selection-item .text-success {
+color: var(--success);
+}
+
+/* ============================================================
+EMPTY STATE DO MODAL
+============================================================ */
+
+#modalTrocas .empty-state.compact {
+min-height: 130px;
+padding: 20px;
+}
+
+/* ============================================================
+HIDDEN
+============================================================ */
+
+#novaDivergenciaPage .hidden {
+display: none !important;
+}
+
+/* ============================================================
+RESPONSIVO
+============================================================ */
+
+@media (max-width: 1100px) {
+.form-layout {
+grid-template-columns: minmax(0, 1fr) 290px;
+}
+}
+
+@media (max-width: 950px) {
+.form-layout {
+grid-template-columns: 1fr;
+}
+
+.panel-side {
+order: 2;
+}
+
+.form-layout > .panel:first-child {
+order: 1;
+}
+}
+
+@media (max-width: 700px) {
+#novaDivergenciaPage > .page-header {
+align-items: flex-start;
+}
+
+#novaDivergenciaPage .page-header {
+flex-direction: column;
+gap: 14px;
+}
+
+#novaDivergenciaPage .page-header .btn {
+width: 100%;
+}
+
+#novaDivergenciaPage .page-header h2 {
+font-size: 21px;
+}
+
+.form-grid {
+grid-template-columns: 1fr;
+}
+
+.form-group-wide,
+.form-group-full {
+grid-column: auto;
+}
+
+.input-action {
+flex-direction: column;
+}
+
+.input-action .btn {
+width: 100%;
+}
+
+.product-preview {
+align-items: flex-start;
+flex-direction: column;
+}
+
+.product-preview-section {
+width: 100%;
+text-align: left;
+}
+
+.empty-inline {
+align-items: flex-start;
+flex-direction: column;
+}
+
+.empty-inline .btn {
+width: 100%;
+}
+
+.form-footer {
+flex-direction: column-reverse;
+}
+
+.form-footer .btn {
+width: 100%;
+}
+
+.divergencia-troca-card {
+align-items: flex-start;
+flex-direction: column;
+}
+
+.divergencia-troca-card .btn {
+width: 100%;
+}
+
+#modalTrocas .modal,
+#modalProdutoRapido .modal {
+width: calc(100vw - 20px);
+}
+
+.selection-item {
+align-items: flex-start;
+}
+}
+
+@media (max-width: 480px) {
+.form-layout {
+gap: 14px;
+}
+
+.form-layout > .panel:first-child {
+padding: 15px;
+}
+
+.form-layout > .panel:first-child > .panel-header {
+align-items: flex-start;
+flex-direction: column;
+}
+
+#novaDivergenciaCompetencia {
+align-self: flex-start;
+}
+
+.result-summary {
+padding-left: 15px;
+padding-right: 15px;
+}
+
+.side-info {
+margin-left: 15px;
+margin-right: 15px;
+}
+
+.selection-item {
+gap: 10px;
+padding: 12px;
+}
+
+.selection-item > div:last-child {
+font-size: 11px;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+.selection-item {
+transition: none;
+}
+}

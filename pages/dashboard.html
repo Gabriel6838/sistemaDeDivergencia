@@ -1,0 +1,347 @@
+
+<section
+  id="dashboardPage"
+  class="page-section"
+  aria-labelledby="dashboardTitulo"
+>
+
+  <div class="page-header dashboard-page-header">
+
+    <div>
+
+      <span class="page-eyebrow">
+        Indicadores
+      </span>
+
+      <h2 id="dashboardTitulo">
+        Dashboard
+      </h2>
+
+      <p>
+        Acompanhe as divergências da competência atual.
+      </p>
+
+    </div>
+
+    <div
+      id="dashboardCompetencia"
+      class="status-pill status-info dashboard-competencia"
+    >
+      —
+    </div>
+
+  </div>
+
+
+  <div
+    id="dashboardAlerta"
+    class="alert alert-warning dashboard-alert hidden"
+  >
+
+    <div class="alert-icon">
+      !
+    </div>
+
+    <div>
+
+      <strong>
+        Nenhuma competência aberta
+      </strong>
+
+      <p>
+        Abra uma competência para visualizar os indicadores atuais.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="stats-grid dashboard-stats">
+
+    <article class="stat-card dashboard-stat-card">
+
+      <div class="stat-icon stat-icon-blue">
+        #
+      </div>
+
+      <div class="dashboard-stat-content">
+
+        <span>
+          Divergências
+        </span>
+
+        <strong id="dashboardTotal">
+          0
+        </strong>
+
+        <small>
+          registros na competência
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <article class="stat-card dashboard-stat-card">
+
+      <div class="stat-icon stat-icon-red">
+        −
+      </div>
+
+      <div class="dashboard-stat-content">
+
+        <span>
+          Faltas (-)
+        </span>
+
+        <strong
+          id="dashboardFaltas"
+          class="text-danger"
+        >
+          R$ 0,00
+        </strong>
+
+        <small>
+          valor negativo
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <article class="stat-card dashboard-stat-card">
+
+      <div class="stat-icon stat-icon-green">
+        +
+      </div>
+
+      <div class="dashboard-stat-content">
+
+        <span>
+          Sobras (+)
+        </span>
+
+        <strong
+          id="dashboardSobras"
+          class="text-success"
+        >
+          R$ 0,00
+        </strong>
+
+        <small>
+          valor positivo
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <article
+      class="stat-card dashboard-stat-card stat-card-highlight"
+    >
+
+      <div class="stat-icon stat-icon-primary">
+        =
+      </div>
+
+      <div class="dashboard-stat-content">
+
+        <span>
+          Saldo da Divergência
+        </span>
+
+        <strong id="dashboardSaldo">
+          R$ 0,00
+        </strong>
+
+        <small>
+          faltas + sobras
+        </small>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div class="dashboard-grid">
+
+    <section class="panel dashboard-panel">
+
+      <div class="panel-header dashboard-panel-header">
+
+        <div>
+
+          <span class="panel-eyebrow">
+            Últimos registros
+          </span>
+
+          <h3>
+            Divergências recentes
+          </h3>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm"
+          data-page="pesquisa"
+        >
+          Ver todas
+        </button>
+
+      </div>
+
+
+      <div class="table-wrapper dashboard-table-wrapper">
+
+        <table class="data-table dashboard-table">
+
+          <thead>
+
+            <tr>
+              <th>Produto</th>
+              <th>Seção</th>
+              <th>Qtd.</th>
+              <th>Valor</th>
+              <th>Status</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="dashboardTabela">
+
+            <tr>
+
+              <td colspan="5">
+
+                <div class="dashboard-loading">
+
+                  <strong>
+                    Carregando...
+                  </strong>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <section class="panel dashboard-panel">
+
+      <div class="panel-header dashboard-panel-header">
+
+        <div>
+
+          <span class="panel-eyebrow">
+            Resumo
+          </span>
+
+          <h3>
+            Competência
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="dashboard-summary">
+
+        <div class="summary-main">
+
+          <span>
+            Competência atual
+          </span>
+
+          <strong id="dashboardCompetenciaGrande">
+            —
+          </strong>
+
+          <span
+            id="dashboardStatusCompetencia"
+            class="status-pill status-success"
+          >
+            —
+          </span>
+
+        </div>
+
+
+        <div class="summary-list">
+
+          <div>
+            <span>
+              Registros
+            </span>
+
+            <strong id="dashboardResumoRegistros">
+              0
+            </strong>
+          </div>
+
+
+          <div>
+            <span>
+              Faltas
+            </span>
+
+            <strong
+              id="dashboardResumoFaltas"
+              class="text-danger"
+            >
+              R$ 0,00
+            </strong>
+          </div>
+
+
+          <div>
+            <span>
+              Sobras
+            </span>
+
+            <strong
+              id="dashboardResumoSobras"
+              class="text-success"
+            >
+              R$ 0,00
+            </strong>
+          </div>
+
+
+          <div class="summary-total">
+
+            <span>
+              Saldo
+            </span>
+
+            <strong id="dashboardResumoSaldo">
+              R$ 0,00
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</section>
+
