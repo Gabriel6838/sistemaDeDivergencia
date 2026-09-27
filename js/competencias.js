@@ -13,6 +13,10 @@ window.StockVisionCompetencias = (() => {
     document.getElementById(id);
 
 
+  /* =========================================================
+     INICIALIZAÇÃO
+  ========================================================= */
+
   async function init() {
 
     configurarEventos();
@@ -21,6 +25,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     EVENTOS
+  ========================================================= */
 
   function configurarEventos() {
 
@@ -47,6 +55,7 @@ window.StockVisionCompetencias = (() => {
           abrirNovaCompetencia();
 
           return;
+
         }
 
 
@@ -62,6 +71,7 @@ window.StockVisionCompetencias = (() => {
           fecharNovaCompetencia();
 
           return;
+
         }
 
 
@@ -77,6 +87,7 @@ window.StockVisionCompetencias = (() => {
           fecharNovaCompetencia();
 
           return;
+
         }
 
 
@@ -98,6 +109,7 @@ window.StockVisionCompetencias = (() => {
           }
 
           return;
+
         }
 
 
@@ -113,6 +125,7 @@ window.StockVisionCompetencias = (() => {
           abrirModalEncerramento();
 
           return;
+
         }
 
 
@@ -128,6 +141,7 @@ window.StockVisionCompetencias = (() => {
           fecharModalEncerramento();
 
           return;
+
         }
 
 
@@ -143,6 +157,7 @@ window.StockVisionCompetencias = (() => {
           fecharModalEncerramento();
 
           return;
+
         }
 
 
@@ -158,6 +173,7 @@ window.StockVisionCompetencias = (() => {
           await encerrarCompetencia();
 
           return;
+
         }
 
 
@@ -173,6 +189,7 @@ window.StockVisionCompetencias = (() => {
           fecharVisualizacaoCompetencia();
 
           return;
+
         }
 
 
@@ -188,6 +205,7 @@ window.StockVisionCompetencias = (() => {
           fecharVisualizacaoCompetencia();
 
           return;
+
         }
 
 
@@ -203,6 +221,7 @@ window.StockVisionCompetencias = (() => {
           await gerarPdfCompetencia();
 
           return;
+
         }
 
 
@@ -234,6 +253,7 @@ window.StockVisionCompetencias = (() => {
           }
 
           return;
+
         }
 
 
@@ -250,6 +270,7 @@ window.StockVisionCompetencias = (() => {
           fecharNovaCompetencia();
 
           return;
+
         }
 
 
@@ -266,6 +287,7 @@ window.StockVisionCompetencias = (() => {
           fecharModalEncerramento();
 
           return;
+
         }
 
 
@@ -328,6 +350,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     CARREGAR COMPETÊNCIAS
+  ========================================================= */
 
   async function carregarCompetencias() {
 
@@ -412,18 +438,16 @@ window.StockVisionCompetencias = (() => {
         error
       );
 
-      renderizarErro(
+      const mensagem =
         obterMensagemErro(
           error,
           'Não foi possível carregar as competências.'
-        )
-      );
+        );
+
+      renderizarErro(mensagem);
 
       mostrarToast(
-        obterMensagemErro(
-          error,
-          'Não foi possível carregar as competências.'
-        ),
+        mensagem,
         'error'
       );
 
@@ -435,6 +459,16 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     QUANTIDADE DE DIVERGÊNCIAS
+     
+     IMPORTANTE:
+     A quantidade da competência agora representa
+     produtos distintos que possuem um último registro.
+     
+     Não usamos apenas a quantidade bruta de lançamentos.
+  ========================================================= */
 
   async function carregarQuantidadeDivergencias() {
 
@@ -448,101 +482,491 @@ window.StockVisionCompetencias = (() => {
       competencias.map(
         async competencia => {
 
-          const resultado =
-            await window.supabaseClient
-              .from('divergencias')
-              .select(
-                'id',
-                {
-                  count: 'exact',
-                  head: true
-                }
-              )
-              .eq(
-                'competencia_id',
-                competencia.id
+          try {
+
+            const dados =
+              await buscarDivergenciasBrutas(
+                competencia
               );
 
-
-          if (resultado.error) {
+            const finais =
+              obterDivergenciasFinais(
+                dados
+              );
 
             competencia.quantidade =
-              0;
+              finais.length;
 
-            return;
+          } catch (error) {
+
+            console.error(
+              'Erro ao contar divergências da competência:',
+              competencia.id,
+              error
+            );
+
+            competencia.quantidade = 0;
 
           }
-
-
-          competencia.quantidade =
-            resultado.count || 0;
 
         }
       )
 
     );
 
-
-    const semRelacionamento =
-      competencias.filter(
-        item =>
-          Number(item.quantidade) === 0
-      );
+  }
 
 
-    if (!semRelacionamento.length) {
-      return;
+  /* =========================================================
+     BUSCAR DIVERGÊNCIAS BRUTAS
+     
+     Aqui buscamos TODOS os lançamentos.
+     
+     O histórico permanece intacto.
+     A filtragem para "última por produto" acontece depois.
+  ========================================================= */
+
+  async function buscarDivergenciasBrutas(
+    competencia
+  ) {
+
+    if (!competencia) {
+      return [];
     }
 
 
-    for (
-      const competencia
-      of semRelacionamento
-    ) {
-
-      if (!competencia.competencia) {
-        continue;
-      }
+    let registros = [];
 
 
-      const competenciaTexto =
-        normalizarCompetencia(
-          competencia.competencia
+    /* -------------------------------------------------------
+       PRIMEIRA TENTATIVA:
+       competência pelo ID
+    ------------------------------------------------------- */
+
+    const porId =
+      await window.supabaseClient
+        .from('divergencias')
+        .select(`
+          id,
+          produto_id,
+          competencia,
+          competencia_id,
+          quantidade_sistema,
+          quantidade_fisica,
+          divergencia_quantidade,
+          custo,
+          divergencia_valor,
+          observacao,
+          status,
+          resolvido_em,
+          observacao_resolucao,
+          created_at
+        `)
+        .eq(
+          'competencia_id',
+          competencia.id
+        )
+        .order(
+          'created_at',
+          {
+            ascending: false
+          }
         );
 
 
-      const resultado =
-        await window.supabaseClient
-          .from('divergencias')
-          .select(
-            'id, competencia'
-          );
-
-
-      if (resultado.error) {
-        continue;
-      }
-
-
-      const quantidade =
-        (resultado.data || [])
-          .filter(
-            item =>
-              normalizarCompetencia(
-                item.competencia
-              ) ===
-              competenciaTexto
-          )
-          .length;
-
-
-      competencia.quantidade =
-        quantidade;
-
+    if (porId.error) {
+      throw porId.error;
     }
+
+
+    registros =
+      porId.data || [];
+
+
+    /* -------------------------------------------------------
+       COMPATIBILIDADE COM REGISTROS ANTIGOS
+       
+       Caso existam registros sem competencia_id,
+       buscamos também pela competência textual.
+    ------------------------------------------------------- */
+
+    const competenciaNormalizada =
+      normalizarCompetencia(
+        competencia.competencia
+      );
+
+
+    const idsExistentes =
+      new Set(
+        registros.map(
+          item =>
+            String(item.id)
+        )
+      );
+
+
+    const porTexto =
+      await window.supabaseClient
+        .from('divergencias')
+        .select(`
+          id,
+          produto_id,
+          competencia,
+          competencia_id,
+          quantidade_sistema,
+          quantidade_fisica,
+          divergencia_quantidade,
+          custo,
+          divergencia_valor,
+          observacao,
+          status,
+          resolvido_em,
+          observacao_resolucao,
+          created_at
+        `)
+        .is(
+          'competencia_id',
+          null
+        )
+        .order(
+          'created_at',
+          {
+            ascending: false
+          }
+        );
+
+
+    if (porTexto.error) {
+      throw porTexto.error;
+    }
+
+
+    (porTexto.data || []).forEach(
+      item => {
+
+        if (
+          idsExistentes.has(
+            String(item.id)
+          )
+        ) {
+          return;
+        }
+
+
+        if (
+          normalizarCompetencia(
+            item.competencia
+          ) !==
+          competenciaNormalizada
+        ) {
+          return;
+        }
+
+
+        registros.push(item);
+
+      }
+    );
+
+
+    registros.sort(
+      (
+        a,
+        b
+      ) =>
+        obterTimestamp(b) -
+        obterTimestamp(a)
+    );
+
+
+    return carregarProdutosDivergencias(
+      registros
+    );
 
   }
 
+
+  /* =========================================================
+     REGRA PRINCIPAL DO STOCKVISION
+     
+     PARA CADA PRODUTO:
+     
+     - pega todos os lançamentos;
+     - ordena pela data;
+     - mantém somente o mais recente.
+     
+     Exemplo:
+     
+     Produto A
+     01/09 → -R$ 100
+     03/09 → -R$ 80
+     
+     Resultado final:
+     Produto A → -R$ 80
+     
+     Se o último lançamento for R$ 0:
+     
+     01/09 → -R$ 100
+     03/09 → R$ 0
+     
+     Resultado final:
+     Produto A → R$ 0
+     
+     O histórico NÃO é apagado.
+  ========================================================= */
+
+  function obterDivergenciasFinais(
+    registros
+  ) {
+
+    if (
+      !Array.isArray(registros) ||
+      !registros.length
+    ) {
+      return [];
+    }
+
+
+    const mapa =
+      new Map();
+
+
+    const ordenados =
+      registros
+        .slice()
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            obterTimestamp(b) -
+            obterTimestamp(a)
+        );
+
+
+    ordenados.forEach(
+      registro => {
+
+        const chave =
+          obterChaveProduto(
+            registro
+          );
+
+
+        /*
+         * O primeiro registro encontrado é
+         * o mais recente.
+         *
+         * Se já existe no mapa, ignoramos
+         * os registros antigos.
+         */
+
+        if (
+          mapa.has(chave)
+        ) {
+          return;
+        }
+
+
+        mapa.set(
+          chave,
+          registro
+        );
+
+      }
+    );
+
+
+    return Array.from(
+      mapa.values()
+    ).sort(
+      (
+        a,
+        b
+      ) =>
+        obterTimestamp(b) -
+        obterTimestamp(a)
+    );
+
+  }
+
+
+  /* =========================================================
+     CHAVE DO PRODUTO
+     
+     Normalmente usamos produto_id.
+     
+     Para registros antigos sem produto_id,
+     usamos um identificador alternativo.
+  ========================================================= */
+
+  function obterChaveProduto(
+    registro
+  ) {
+
+    if (
+      registro &&
+      registro.produto_id !== null &&
+      registro.produto_id !== undefined &&
+      String(
+        registro.produto_id
+      ).trim() !== ''
+    ) {
+
+      return `id:${String(
+        registro.produto_id
+      )}`;
+
+    }
+
+
+    /*
+     * Fallback para registros antigos.
+     */
+
+    if (
+      registro &&
+      registro.produto &&
+      registro.produto.codigo
+    ) {
+
+      return `codigo:${String(
+        registro.produto.codigo
+      ).trim()}`;
+
+    }
+
+
+    /*
+     * Último recurso:
+     * o próprio ID.
+     */
+
+    return `registro:${String(
+      registro?.id || ''
+    )}`;
+
+  }
+
+
+  /* =========================================================
+     TIMESTAMP
+  ========================================================= */
+
+  function obterTimestamp(
+    registro
+  ) {
+
+    if (
+      !registro
+    ) {
+      return 0;
+    }
+
+
+    const data =
+      new Date(
+        registro.created_at || 0
+      );
+
+
+    const timestamp =
+      data.getTime();
+
+
+    return Number.isFinite(
+      timestamp
+    )
+      ? timestamp
+      : 0;
+
+  }
+
+
+  /* =========================================================
+     CARREGAR PRODUTOS
+  ========================================================= */
+
+  async function carregarProdutosDivergencias(
+    registros
+  ) {
+
+    const ids =
+      [
+        ...new Set(
+          registros
+            .map(
+              item =>
+                item.produto_id
+            )
+            .filter(Boolean)
+            .map(
+              id =>
+                String(id)
+            )
+        )
+      ];
+
+
+    if (!ids.length) {
+      return registros;
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await window.supabaseClient
+        .from('produtos')
+        .select(
+          'id,codigo,descricao,secao'
+        )
+        .in(
+          'id',
+          ids
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    const mapa =
+      new Map(
+        (data || []).map(
+          produto => [
+            String(
+              produto.id
+            ),
+            produto
+          ]
+        )
+      );
+
+
+    return registros.map(
+      item => ({
+
+        ...item,
+
+        produto:
+          mapa.get(
+            String(
+              item.produto_id
+            )
+          ) || null
+
+      })
+    );
+
+  }
+
+
+  /* =========================================================
+     CARREGANDO
+  ========================================================= */
 
   function renderizarCarregando() {
 
@@ -570,6 +994,10 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     ERRO
+  ========================================================= */
+
   function renderizarErro(
     mensagem
   ) {
@@ -595,6 +1023,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     COMPETÊNCIA ATUAL
+  ========================================================= */
 
   function renderizarCompetenciaAtual() {
 
@@ -641,8 +1073,10 @@ window.StockVisionCompetencias = (() => {
       }
 
       if (descricao) {
+
         descricao.textContent =
           'Abra uma nova competência para começar a registrar divergências.';
+
       }
 
       if (abertura) {
@@ -729,6 +1163,7 @@ window.StockVisionCompetencias = (() => {
       valor.textContent =
         'Carregando...';
 
+
       calcularValorCompetencia(
         competenciaAtual
       )
@@ -736,13 +1171,16 @@ window.StockVisionCompetencias = (() => {
           total => {
 
             if (
-              competenciaAtual &&
-              competenciaAtual.id ===
-                competenciaAtual.id
+              competenciaAtual
             ) {
 
               valor.textContent =
-                formatarMoeda(
+                formatarMoedaComSinal(
+                  total
+                );
+
+              valor.className =
+                obterClasseValorCompetencia(
                   total
                 );
 
@@ -751,11 +1189,21 @@ window.StockVisionCompetencias = (() => {
           }
         )
         .catch(
-          () => {
+          error => {
+
+            console.error(
+              'Erro ao calcular valor da competência:',
+              error
+            );
 
             if (valor) {
+
               valor.textContent =
                 'R$ 0,00';
+
+              valor.className =
+                '';
+
             }
 
           }
@@ -775,6 +1223,15 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     VALOR FINAL DA COMPETÊNCIA
+     
+     IMPORTANTE:
+     NÃO soma todos os lançamentos.
+     
+     Soma somente a última divergência de cada produto.
+  ========================================================= */
+
   async function calcularValorCompetencia(
     competencia
   ) {
@@ -784,42 +1241,36 @@ window.StockVisionCompetencias = (() => {
     }
 
 
-    const porId =
-      await window.supabaseClient
-        .from('divergencias')
-        .select(
-          'divergencia_valor'
-        )
-        .eq(
-          'competencia_id',
-          competencia.id
-        );
-
-
-    if (
-      !porId.error &&
-      Array.isArray(porId.data)
-    ) {
-
-      return porId.data.reduce(
-        (
-          total,
-          item
-        ) =>
-          total +
-          numeroSeguro(
-            item.divergencia_valor
-          ),
-        0
+    const dados =
+      await buscarDivergenciasBrutas(
+        competencia
       );
 
-    }
+
+    const finais =
+      obterDivergenciasFinais(
+        dados
+      );
 
 
-    return 0;
+    return finais.reduce(
+      (
+        total,
+        item
+      ) =>
+        total +
+        numeroSeguro(
+          item.divergencia_valor
+        ),
+      0
+    );
 
   }
 
+
+  /* =========================================================
+     TABELA DE COMPETÊNCIAS
+  ========================================================= */
 
   function renderizarTabela() {
 
@@ -999,6 +1450,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     NOVA COMPETÊNCIA
+  ========================================================= */
 
   function abrirNovaCompetencia() {
 
@@ -1229,6 +1684,10 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     ENCERRAMENTO
+  ========================================================= */
+
   function abrirModalEncerramento() {
 
     if (!competenciaAtual) {
@@ -1374,6 +1833,10 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     VISUALIZAÇÃO DA COMPETÊNCIA
+  ========================================================= */
+
   async function abrirVisualizacaoCompetencia(
     competencia
   ) {
@@ -1427,9 +1890,20 @@ window.StockVisionCompetencias = (() => {
 
     try {
 
-      divergenciasVisualizadas =
-        await buscarTodasDivergencias(
+      /*
+       * A visualização mostra somente
+       * a divergência mais recente por produto.
+       */
+
+      const dadosBrutos =
+        await buscarDivergenciasBrutas(
           competencia
+        );
+
+
+      divergenciasVisualizadas =
+        obterDivergenciasFinais(
+          dadosBrutos
         );
 
 
@@ -1539,233 +2013,9 @@ window.StockVisionCompetencias = (() => {
   }
 
 
-  async function buscarTodasDivergencias(
-    competencia
-  ) {
-
-    if (!competencia) {
-      return [];
-    }
-
-
-    let registros = [];
-
-
-    const porId =
-      await window.supabaseClient
-        .from('divergencias')
-        .select(`
-          id,
-          produto_id,
-          competencia,
-          competencia_id,
-          quantidade_sistema,
-          quantidade_fisica,
-          divergencia_quantidade,
-          custo,
-          divergencia_valor,
-          observacao,
-          status,
-          resolvido_em,
-          observacao_resolucao,
-          created_at
-        `)
-        .eq(
-          'competencia_id',
-          competencia.id
-        )
-        .order(
-          'created_at',
-          {
-            ascending: false
-          }
-        );
-
-
-    if (porId.error) {
-
-      throw porId.error;
-
-    }
-
-
-    registros =
-      porId.data || [];
-
-
-    const competenciaNormalizada =
-      normalizarCompetencia(
-        competencia.competencia
-      );
-
-
-    const idsExistentes =
-      new Set(
-        registros.map(
-          item =>
-            String(item.id)
-        )
-      );
-
-
-    const porTexto =
-      await window.supabaseClient
-        .from('divergencias')
-        .select(`
-          id,
-          produto_id,
-          competencia,
-          competencia_id,
-          quantidade_sistema,
-          quantidade_fisica,
-          divergencia_quantidade,
-          custo,
-          divergencia_valor,
-          observacao,
-          status,
-          resolvido_em,
-          observacao_resolucao,
-          created_at
-        `)
-        .order(
-          'created_at',
-          {
-            ascending: false
-          }
-        );
-
-
-    if (porTexto.error) {
-
-      throw porTexto.error;
-
-    }
-
-
-    (porTexto.data || []).forEach(
-      item => {
-
-        if (
-          idsExistentes.has(
-            String(item.id)
-          )
-        ) {
-          return;
-        }
-
-
-        if (
-          normalizarCompetencia(
-            item.competencia
-          ) !==
-          competenciaNormalizada
-        ) {
-          return;
-        }
-
-
-        registros.push(
-          item
-        );
-
-      }
-    );
-
-
-    registros.sort(
-      (
-        a,
-        b
-      ) =>
-        new Date(
-          b.created_at || 0
-        ).getTime() -
-        new Date(
-          a.created_at || 0
-        ).getTime()
-    );
-
-
-    return carregarProdutosDivergencias(
-      registros
-    );
-
-  }
-
-
-  async function carregarProdutosDivergencias(
-    registros
-  ) {
-
-    const ids =
-      [
-        ...new Set(
-          registros
-            .map(
-              item =>
-                item.produto_id
-            )
-            .filter(Boolean)
-            .map(
-              id =>
-                String(id)
-            )
-        )
-      ];
-
-
-    if (!ids.length) {
-      return registros;
-    }
-
-
-    const {
-      data,
-      error
-    } =
-      await window.supabaseClient
-        .from('produtos')
-        .select(
-          'id,codigo,descricao,secao'
-        )
-        .in(
-          'id',
-          ids
-        );
-
-
-    if (error) {
-      throw error;
-    }
-
-
-    const mapa =
-      new Map(
-        (data || []).map(
-          produto => [
-            String(
-              produto.id
-            ),
-            produto
-          ]
-        )
-      );
-
-
-    return registros.map(
-      item => ({
-        ...item,
-        produto:
-          mapa.get(
-            String(
-              item.produto_id
-            )
-          ) || null
-      })
-    );
-
-  }
-
+  /* =========================================================
+     RENDERIZAR DIVERGÊNCIAS FINAIS
+  ========================================================= */
 
   function renderizarDivergencias() {
 
@@ -1778,6 +2028,11 @@ window.StockVisionCompetencias = (() => {
     const valor =
       $('visualizacaoValorTotal');
 
+
+    /*
+     * Aqui já recebemos somente
+     * a última divergência por produto.
+     */
 
     if (total) {
 
@@ -1811,11 +2066,9 @@ window.StockVisionCompetencias = (() => {
         );
 
       valor.className =
-        valorTotal < 0
-          ? 'competencia-valor-negativo'
-          : valorTotal > 0
-            ? 'competencia-valor-positivo'
-            : '';
+        obterClasseValorCompetencia(
+          valorTotal
+        );
 
     }
 
@@ -1854,6 +2107,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     LINHA DA DIVERGÊNCIA
+  ========================================================= */
 
   function criarLinhaDivergencia(
     item
@@ -2031,6 +2288,10 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     FECHAR VISUALIZAÇÃO
+  ========================================================= */
+
   function fecharVisualizacaoCompetencia() {
 
     const modal =
@@ -2053,6 +2314,13 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     GERAR PDF
+     
+     O PDF também utiliza somente a última
+     divergência de cada produto.
+  ========================================================= */
 
   async function gerarPdfCompetencia() {
 
@@ -2099,9 +2367,21 @@ window.StockVisionCompetencias = (() => {
 
     try {
 
-      const dados =
-        await buscarTodasDivergencias(
+      /*
+       * Buscamos todos os lançamentos,
+       * mas imediatamente aplicamos a regra
+       * de última divergência por produto.
+       */
+
+      const dadosBrutos =
+        await buscarDivergenciasBrutas(
           competenciaVisualizada
+        );
+
+
+      const dados =
+        obterDivergenciasFinais(
+          dadosBrutos
         );
 
 
@@ -2183,6 +2463,13 @@ window.StockVisionCompetencias = (() => {
       }
 
 
+      /*
+       * TOTAL FINAL
+       *
+       * Não considera lançamentos antigos
+       * do mesmo produto.
+       */
+
       const total =
         dados.length;
 
@@ -2208,18 +2495,36 @@ window.StockVisionCompetencias = (() => {
 
 
       pdf.text(
-        `Divergências: ${total}`,
+        `Produtos considerados: ${total}`,
         90,
         22
       );
 
 
       pdf.text(
-        `Valor total: ${formatarMoeda(
+        `Valor final: ${formatarMoedaComSinal(
           valorTotal
         )}`,
-        145,
+        160,
         22
+      );
+
+
+      /*
+       * Informação explicativa no PDF.
+       */
+
+      pdf.setFont(
+        undefined,
+        'normal'
+      );
+
+      pdf.setFontSize(7.5);
+
+      pdf.text(
+        'Critério: considerada a divergência mais recente de cada produto na competência.',
+        90,
+        27
       );
 
 
@@ -2510,6 +2815,10 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     CABEÇALHO PDF
+  ========================================================= */
+
   function desenharCabecalhoPdf(
     pdf,
     colunas,
@@ -2553,6 +2862,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     MODAIS
+  ========================================================= */
 
   function abrirModal(
     modal
@@ -2617,6 +2930,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     FORMATAÇÕES
+  ========================================================= */
 
   function formatarCompetencia(
     valor
@@ -2848,15 +3165,50 @@ window.StockVisionCompetencias = (() => {
 
 
     if (numero > 0) {
+
       return `+${formatarNumero(
         numero
       )}`;
+
     }
 
 
     return formatarNumero(
       numero
     );
+
+  }
+
+
+  /* =========================================================
+     CLASSES DE VALOR
+  ========================================================= */
+
+  function obterClasseValorCompetencia(
+    valor
+  ) {
+
+    const numero =
+      numeroSeguro(
+        valor
+      );
+
+
+    if (numero < 0) {
+
+      return 'competencia-valor-negativo';
+
+    }
+
+
+    if (numero > 0) {
+
+      return 'competencia-valor-positivo';
+
+    }
+
+
+    return '';
 
   }
 
@@ -2872,12 +3224,16 @@ window.StockVisionCompetencias = (() => {
 
 
     if (numero > 0) {
+
       return 'competencia-divergencia-positiva';
+
     }
 
 
     if (numero < 0) {
+
       return 'competencia-divergencia-negativa';
+
     }
 
 
@@ -2885,6 +3241,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     STATUS
+  ========================================================= */
 
   function formatarStatusDivergencia(
     status
@@ -2911,10 +3271,50 @@ window.StockVisionCompetencias = (() => {
 
     if (
       texto ===
+      'aguardando_confirmacao'
+    ) {
+
+      return 'Aguardando confirmação';
+
+    }
+
+
+    if (
+      texto ===
       'resolvida'
     ) {
 
       return 'Resolvida';
+
+    }
+
+
+    if (
+      texto ===
+      'resolvido'
+    ) {
+
+      return 'Resolvido';
+
+    }
+
+
+    if (
+      texto ===
+      'continua'
+    ) {
+
+      return 'Continua';
+
+    }
+
+
+    if (
+      texto ===
+      'em_analise'
+    ) {
+
+      return 'Em análise';
 
     }
 
@@ -2939,7 +3339,9 @@ window.StockVisionCompetencias = (() => {
 
     if (
       texto ===
-      'resolvida'
+      'resolvida' ||
+      texto ===
+      'resolvido'
     ) {
 
       return 'resolvida';
@@ -2949,10 +3351,32 @@ window.StockVisionCompetencias = (() => {
 
     if (
       texto ===
-      'aguardando confirmação'
+      'aguardando confirmação' ||
+      texto ===
+      'aguardando_confirmacao'
     ) {
 
       return 'aguardando';
+
+    }
+
+
+    if (
+      texto ===
+      'continua'
+    ) {
+
+      return 'outro';
+
+    }
+
+
+    if (
+      texto ===
+      'em_analise'
+    ) {
+
+      return 'outro';
 
     }
 
@@ -2972,6 +3396,10 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     NÚMERO
+  ========================================================= */
+
   function numeroSeguro(
     valor
   ) {
@@ -2990,6 +3418,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     HTML
+  ========================================================= */
 
   function escapeHtml(
     valor
@@ -3022,6 +3454,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     TEXTO
+  ========================================================= */
 
   function limitarTexto(
     texto,
@@ -3076,6 +3512,10 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     ERROS
+  ========================================================= */
+
   function obterMensagemErro(
     error,
     fallback
@@ -3105,6 +3545,10 @@ window.StockVisionCompetencias = (() => {
 
   }
 
+
+  /* =========================================================
+     TOAST
+  ========================================================= */
 
   function mostrarToast(
     mensagem,
@@ -3220,8 +3664,23 @@ window.StockVisionCompetencias = (() => {
   }
 
 
+  /* =========================================================
+     API PÚBLICA
+  ========================================================= */
+
   return {
-    init
+    init,
+
+    /*
+     * Expostas para outros módulos,
+     * caso o Dashboard precise usar
+     * exatamente a mesma regra.
+     */
+
+    obterDivergenciasFinais,
+
+    obterChaveProduto
+
   };
 
 })();
