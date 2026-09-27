@@ -8,7 +8,7 @@ const StockVisionApp = {
   pages: {
 
     inicio: {
-      title: 'Início',
+      title: 'Dashboard',
       file: './pages/inicio.html',
       script: './js/inicio.js',
       style: './css/inicio.css'
