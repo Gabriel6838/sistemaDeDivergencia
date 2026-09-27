@@ -54,7 +54,19 @@ const StockVisionApp = {
       file: './pages/competencias.html',
       script: './js/competencias.js',
       style: './css/competencias.css'
-    }
+    },
+    tratamento: {
+      title: 'Tratamento',
+      file: './pages/tratamento.html',
+      script: './js/tratamento.js',
+      style: './css/tratamento.css'
+    },
+    'backup-dados': {
+        title: 'Backup',
+        file: './pages/backup.html',
+        script: './js/backup.js',
+        style: './css/backup.css'
+    },
 
   },
 
@@ -821,7 +833,13 @@ const StockVisionApp = {
         'StockVisionDashboard',
 
       './js/competencias.js':
-        'StockVisionCompetencias'
+        'StockVisionCompetencias',
+
+      './js/tratamento.js':
+        'StockVisionTratamento',
+
+      './js/backup.js':
+        'StockVisionBackup',
 
     };
 

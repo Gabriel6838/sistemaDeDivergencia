@@ -27,25 +27,34 @@ const StockVisionPesquisa = {
   obterSupabase() {
 
     if (
+      window.supabaseClient &&
+      typeof window.supabaseClient.from === 'function'
+    ) {
+
+      return window.supabaseClient;
+
+    }
+
+
+    if (
       window.StockVisionSupabase &&
       window.StockVisionSupabase.client
     ) {
+
       return window.StockVisionSupabase.client;
+
     }
 
-    if (
-      window.supabase &&
-      window.supabaseClient
-    ) {
-      return window.supabaseClient;
-    }
 
     if (
       window.supabase &&
       typeof window.supabase.from === 'function'
     ) {
+
       return window.supabase;
+
     }
+
 
     throw new Error(
       'Cliente Supabase não encontrado.'
@@ -194,6 +203,33 @@ const StockVisionPesquisa = {
 
         }
       );
+
+
+    document.addEventListener(
+      'keydown',
+      event => {
+
+        if (
+          event.key !== 'Escape'
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          this.elementos.modalHistorico &&
+          !this.elementos.modalHistorico
+            .classList.contains('hidden')
+        ) {
+
+          this.fecharHistorico();
+
+        }
+
+      }
+    );
 
 
     [
@@ -527,8 +563,11 @@ const StockVisionPesquisa = {
 
       this.elementos.tabela.innerHTML = `
         <tr>
+
           <td colspan="8">
+
             <div class="empty-state empty-state-error">
+
               <strong>
                 Não foi possível realizar a pesquisa
               </strong>
@@ -536,8 +575,11 @@ const StockVisionPesquisa = {
               <span>
                 Verifique a conexão com o banco de dados e tente novamente.
               </span>
+
             </div>
+
           </td>
+
         </tr>
       `;
 
@@ -587,25 +629,17 @@ const StockVisionPesquisa = {
 
   limparFiltros() {
 
-    if (this.elementos.codigo) {
-
-      this.elementos.codigo.value = '';
-
-    }
-
-
-    if (this.elementos.descricao) {
-
-      this.elementos.descricao.value = '';
-
-    }
-
-
-    if (this.elementos.secao) {
-
-      this.elementos.secao.value = '';
-
-    }
+    [
+      this.elementos.codigo,
+      this.elementos.descricao,
+      this.elementos.secao
+    ]
+      .filter(Boolean)
+      .forEach(
+        elemento => {
+          elemento.value = '';
+        }
+      );
 
 
     if (this.elementos.competencia) {
@@ -642,8 +676,11 @@ const StockVisionPesquisa = {
 
     this.elementos.tabela.innerHTML = `
       <tr>
+
         <td colspan="8">
+
           <div class="empty-state">
+
             <strong>
               Carregando divergências...
             </strong>
@@ -651,8 +688,11 @@ const StockVisionPesquisa = {
             <span>
               Aguarde enquanto os registros são consultados.
             </span>
+
           </div>
+
         </td>
+
       </tr>
     `;
 
@@ -677,8 +717,11 @@ const StockVisionPesquisa = {
 
       this.elementos.tabela.innerHTML = `
         <tr>
+
           <td colspan="8">
+
             <div class="empty-state">
+
               <strong>
                 Nenhuma divergência encontrada
               </strong>
@@ -686,8 +729,11 @@ const StockVisionPesquisa = {
               <span>
                 Tente alterar ou remover alguns filtros.
               </span>
+
             </div>
+
           </td>
+
         </tr>
       `;
 
@@ -718,12 +764,8 @@ const StockVisionPesquisa = {
             'click',
             () => {
 
-              const id =
-                botao.dataset.historicoId;
-
-
               this.abrirHistorico(
-                id
+                botao.dataset.historicoId
               );
 
             }
@@ -767,16 +809,19 @@ const StockVisionPesquisa = {
       <tr>
 
         <td>
+
           <span class="table-code">
             ${this.escapeHtml(
               produto.codigo ||
               '—'
             )}
           </span>
+
         </td>
 
 
         <td>
+
           <div class="pesquisa-produto">
 
             <strong>
@@ -787,6 +832,7 @@ const StockVisionPesquisa = {
             </strong>
 
           </div>
+
         </td>
 
 
@@ -799,6 +845,7 @@ const StockVisionPesquisa = {
 
 
         <td>
+
           <span class="timeline-competencia">
             ${this.escapeHtml(
               this.formatarCompetencia(
@@ -806,25 +853,32 @@ const StockVisionPesquisa = {
               )
             )}
           </span>
+
         </td>
 
 
         <td>
+
           <span
             class="pesquisa-quantidade ${classeQuantidade}"
           >
             ${quantidade > 0 ? '+' : ''}
-            ${quantidade}
+            ${this.formatarNumero(
+              quantidade
+            )}
           </span>
+
         </td>
 
 
         <td>
+
           <span class="pesquisa-valor">
             ${this.formatarMoeda(
               valor
             )}
           </span>
+
         </td>
 
 
@@ -836,6 +890,7 @@ const StockVisionPesquisa = {
 
 
         <td class="text-right">
+
           <button
             type="button"
             class="btn btn-secondary btn-sm"
@@ -845,6 +900,7 @@ const StockVisionPesquisa = {
           >
             Histórico
           </button>
+
         </td>
 
       </tr>
@@ -885,10 +941,13 @@ const StockVisionPesquisa = {
 
     const configuracao =
       mapa[valor] || {
+
         classe: 'status-neutral',
+
         texto:
           status ||
           'Sem status'
+
       };
 
 
@@ -929,7 +988,15 @@ const StockVisionPesquisa = {
 
     this.elementos.historicoTimeline.innerHTML = `
       <div class="empty-state">
-        Carregando histórico...
+
+        <strong>
+          Carregando histórico...
+        </strong>
+
+        <span>
+          Aguarde enquanto os registros são consultados.
+        </span>
+
       </div>
     `;
 
@@ -1046,8 +1113,11 @@ const StockVisionPesquisa = {
         trocas
           .flatMap(
             troca => [
+
               troca.divergencia_origem_id,
+
               troca.divergencia_destino_id
+
             ]
           )
           .filter(
@@ -1244,7 +1314,9 @@ const StockVisionPesquisa = {
 
         <strong class="history-stat-value">
           ${quantidadeTotal > 0 ? '+' : ''}
-          ${quantidadeTotal}
+          ${this.formatarNumero(
+            quantidadeTotal
+          )}
         </strong>
 
       </div>
@@ -1408,7 +1480,8 @@ const StockVisionPesquisa = {
 
 
     if (
-      divergencia.observacao
+      divergencia.observacao ||
+      divergencia.observacao_resolucao
     ) {
 
       classes.push(
@@ -1435,6 +1508,19 @@ const StockVisionPesquisa = {
           : 'zero';
 
 
+    const possuiResolucao =
+      Boolean(
+        divergencia.observacao_resolucao ||
+        divergencia.resolvido_em ||
+        String(
+          divergencia.status || ''
+        )
+          .trim()
+          .toLowerCase() ===
+          'resolvida'
+      );
+
+
     return `
 
       <article
@@ -1447,6 +1533,8 @@ const StockVisionPesquisa = {
 
 
         <div class="timeline-content">
+
+          <!-- CABEÇALHO -->
 
           <div class="timeline-top">
 
@@ -1478,6 +1566,32 @@ const StockVisionPesquisa = {
 
           </div>
 
+
+          <!-- EVENTO -->
+
+          <div class="timeline-event-title">
+
+            <div>
+
+              <strong>
+                Divergência registrada
+              </strong>
+
+              <span>
+                Registro realizado em
+                ${this.escapeHtml(
+                  this.formatarData(
+                    divergencia.created_at
+                  )
+                )}
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- DETALHES -->
 
           <div class="timeline-details">
 
@@ -1546,13 +1660,16 @@ const StockVisionPesquisa = {
           </div>
 
 
+          <!-- OBSERVAÇÃO ORIGINAL -->
+
           ${
             divergencia.observacao
               ? `
+
                 <div class="timeline-note">
 
                   <span>
-                    Observação
+                    Observação da divergência
                   </span>
 
                   <p>
@@ -1562,10 +1679,87 @@ const StockVisionPesquisa = {
                   </p>
 
                 </div>
+
               `
               : ''
           }
 
+
+          <!-- RESOLUÇÃO -->
+
+          ${
+            possuiResolucao
+              ? `
+
+                <div class="timeline-resolution">
+
+                  <div class="timeline-resolution-header">
+
+                    <div>
+
+                      <strong>
+                        Resolução
+                      </strong>
+
+                      <span>
+                        ${
+                          divergencia.resolvido_em
+                            ? this.escapeHtml(
+                                this.formatarData(
+                                  divergencia.resolvido_em
+                                )
+                              )
+                            : 'Data não informada'
+                        }
+                      </span>
+
+                    </div>
+
+
+                    ${this.renderizarStatus(
+                      'resolvida'
+                    )}
+
+                  </div>
+
+
+                  <div class="timeline-resolution-note">
+
+                    <span>
+                      Observação da resolução
+                    </span>
+
+
+                    ${
+                      divergencia.observacao_resolucao
+                        ? `
+
+                          <p>
+                            ${this.escapeHtml(
+                              divergencia.observacao_resolucao
+                            )}
+                          </p>
+
+                        `
+                        : `
+
+                          <p class="timeline-note-empty">
+                            Nenhuma observação foi registrada na resolução.
+                          </p>
+
+                        `
+                    }
+
+                  </div>
+
+                </div>
+
+              `
+              : ''
+          }
+
+
+          <!-- TROCA -->
 
           ${
             troca
@@ -1761,6 +1955,7 @@ const StockVisionPesquisa = {
 
             `
             : `
+
               <div class="timeline-trade-product-empty">
 
                 <span>
@@ -1772,6 +1967,7 @@ const StockVisionPesquisa = {
                 </strong>
 
               </div>
+
             `
         }
 

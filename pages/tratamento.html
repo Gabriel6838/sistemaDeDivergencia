@@ -1,0 +1,719 @@
+<section
+  id="tratamentoPage"
+  class="page-section"
+  aria-labelledby="tratamentoTitulo"
+>
+
+  <!-- ========================================================
+       CABEÇALHO
+       ======================================================== -->
+
+  <div class="page-header">
+
+    <div>
+
+      <span class="page-eyebrow">
+        Gestão
+      </span>
+
+      <h2 id="tratamentoTitulo">
+        Tratamento de Divergências
+      </h2>
+
+      <p>
+        Analise as divergências registradas, acompanhe pendências
+        e confirme as resoluções.
+      </p>
+
+    </div>
+
+
+    <div class="page-header-actions">
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        id="btnLimparTratamento"
+      >
+        Limpar filtros
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       RESUMO
+       ======================================================== -->
+
+  <section class="panel tratamento-resumo-panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <span class="panel-eyebrow">
+          Tratamento
+        </span>
+
+        <h3>
+          Acompanhar divergências
+        </h3>
+
+      </div>
+
+
+      <span
+        id="tratamentoQuantidade"
+        class="status-pill status-info"
+      >
+        0 registros
+      </span>
+
+    </div>
+
+
+    <div class="tratamento-resumo-grid">
+
+      <div class="tratamento-resumo-card">
+
+        <span class="tratamento-resumo-label">
+          Registros exibidos
+        </span>
+
+        <strong
+          id="tratamentoResumoTotal"
+          class="tratamento-resumo-value"
+        >
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="tratamento-resumo-card">
+
+        <span class="tratamento-resumo-label">
+          Selecionados
+        </span>
+
+        <strong
+          id="tratamentoSelecionados"
+          class="tratamento-resumo-value hidden"
+        >
+          0 selecionadas
+        </strong>
+
+        <span
+          id="tratamentoSelecionadosVazio"
+          class="tratamento-resumo-muted"
+        >
+          Nenhum selecionado
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       FILTROS
+       ======================================================== -->
+
+  <section class="panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <span class="panel-eyebrow">
+          Filtros
+        </span>
+
+        <h3>
+          Localizar divergências
+        </h3>
+
+      </div>
+
+    </div>
+
+
+    <div class="filters-grid">
+
+      <div class="form-group">
+
+        <label for="tratamentoCodigo">
+          Código
+        </label>
+
+        <input
+          type="search"
+          id="tratamentoCodigo"
+          placeholder="Código do produto"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="tratamentoDescricao">
+          Produto
+        </label>
+
+        <input
+          type="search"
+          id="tratamentoDescricao"
+          placeholder="Nome do produto"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="tratamentoCompetencia">
+          Competência
+        </label>
+
+        <select id="tratamentoCompetencia">
+
+          <option value="">
+            Todas
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="tratamentoStatus">
+          Status
+        </label>
+
+        <select id="tratamentoStatus">
+
+          <option value="">
+            Todos
+          </option>
+
+          <option value="pendente">
+            Pendente
+          </option>
+
+          <option value="aguardando confirmação">
+            Aguardando confirmação
+          </option>
+
+          <option value="resolvida">
+            Resolvida
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="tratamentoTipo">
+          Tipo
+        </label>
+
+        <select id="tratamentoTipo">
+
+          <option value="">
+            Todos
+          </option>
+
+          <option value="negativa">
+            Faltas (-)
+          </option>
+
+          <option value="positiva">
+            Sobras (+)
+          </option>
+
+          <option value="zero">
+            Sem diferença
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="filter-actions">
+
+      <button
+        type="button"
+        id="btnExecutarTratamento"
+        class="btn btn-primary"
+      >
+        Pesquisar
+      </button>
+
+
+      <button
+        type="button"
+        id="btnLimparTratamentoFiltros"
+        class="btn btn-secondary"
+      >
+        Limpar
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       RESULTADOS
+       ======================================================== -->
+
+  <section class="panel tratamento-resultados-panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <span class="panel-eyebrow">
+          Resultados
+        </span>
+
+        <h3>
+          Divergências para tratamento
+        </h3>
+
+      </div>
+
+
+      <div class="tratamento-resultados-acoes">
+
+        <span
+          id="tratamentoSelecionadosTopo"
+          class="tratamento-selecao-info"
+        >
+          Nenhuma selecionada
+        </span>
+
+
+        <button
+          type="button"
+          id="btnExcluirSelecionadas"
+          class="btn btn-danger"
+          disabled
+        >
+          Excluir selecionadas
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="tratamento-info-box">
+
+      <strong>Importante:</strong>
+
+      marcar uma divergência como resolvida altera apenas
+      o status operacional do tratamento. O valor da divergência
+      continua fazendo parte da apuração financeira da competência.
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table class="data-table tratamento-table">
+
+        <thead>
+
+          <tr>
+
+            <th class="tratamento-selection-column">
+
+              <input
+                type="checkbox"
+                id="tratamentoSelecionarTodos"
+                aria-label="Selecionar todas as divergências"
+              >
+
+            </th>
+
+            <th>
+              Produto
+            </th>
+
+            <th>
+              Seção
+            </th>
+
+            <th>
+              Competência
+            </th>
+
+            <th>
+              Qtd.
+            </th>
+
+            <th>
+              Valor
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th class="text-right">
+              Ações
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="tratamentoTabela">
+
+          <tr>
+
+            <td
+              colspan="8"
+              class="tratamento-empty-cell"
+            >
+
+              <div class="tratamento-empty">
+
+                <strong>
+                  Carregando divergências...
+                </strong>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================================
+       MODAL — TROCA
+       ======================================================== -->
+
+  <div
+    id="modalTrocaTratamento"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTrocaTratamentoTitulo"
+    aria-hidden="true"
+  >
+
+    <div class="tratamento-modal-dialog tratamento-modal-troca">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="panel-eyebrow">
+            Associação
+          </span>
+
+          <h3 id="modalTrocaTratamentoTitulo">
+            Produtos vinculados
+          </h3>
+
+          <p>
+            Confira as divergências relacionadas nesta troca.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="modal-close"
+          data-modal-close="modalTrocaTratamento"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div
+        class="modal-body"
+        id="modalTrocaTratamentoConteudo"
+      >
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-modal-close="modalTrocaTratamento"
+        >
+          Fechar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       MODAL — RESOLUÇÃO
+       ======================================================== -->
+
+  <div
+    id="modalConfirmacaoTratamento"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalConfirmacaoTratamentoTitulo"
+    aria-hidden="true"
+  >
+
+    <div class="tratamento-modal-dialog">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="panel-eyebrow">
+            Tratamento
+          </span>
+
+          <h3 id="modalConfirmacaoTratamentoTitulo">
+            Confirmar resolução
+          </h3>
+
+          <p>
+            Registre o que foi feito para solucionar esta pendência.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="modal-close"
+          data-modal-close="modalConfirmacaoTratamento"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="tratamento-resolucao-produto">
+
+          <span>
+            Divergência
+          </span>
+
+          <strong id="tratamentoProdutoResolucao">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="tratamentoObservacaoResolucao">
+            Observação da resolução
+          </label>
+
+          <textarea
+            id="tratamentoObservacaoResolucao"
+            rows="5"
+            maxlength="1000"
+            placeholder="Descreva o que foi feito para resolver esta pendência..."
+          ></textarea>
+
+          <small class="form-hint">
+            Essa informação ficará registrada no histórico.
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-modal-close="modalConfirmacaoTratamento"
+        >
+          Cancelar
+        </button>
+
+
+        <button
+          type="button"
+          id="btnConfirmarTratamento"
+          class="btn btn-modal-confirmar"
+        >
+          Confirmar resolução
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       MODAL — EXCLUSÃO
+       ======================================================== -->
+
+  <div
+    id="modalExclusaoTratamento"
+    class="modal-overlay hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalExclusaoTratamentoTitulo"
+    aria-hidden="true"
+  >
+
+    <div class="tratamento-modal-dialog tratamento-modal-exclusao">
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="panel-eyebrow">
+            Atenção
+          </span>
+
+          <h3 id="modalExclusaoTratamentoTitulo">
+            Excluir divergência
+          </h3>
+
+          <p>
+            Esta ação remove o registro permanentemente.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="modal-close"
+          data-modal-close="modalExclusaoTratamento"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div
+          id="tratamentoMensagemExclusao"
+          class="tratamento-exclusao-mensagem"
+        >
+
+          <strong>
+            Excluir esta divergência?
+          </strong>
+
+          <span>
+            Esta ação não poderá ser desfeita.
+          </span>
+
+        </div>
+
+
+        <div class="tratamento-exclusao-produto">
+
+          <span>
+            Produto
+          </span>
+
+          <strong id="tratamentoProdutoExclusao">
+            —
+          </strong>
+
+        </div>
+
+
+        <div
+          id="tratamentoAvisoExclusao"
+          class="tratamento-aviso-exclusao hidden"
+        >
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-modal-close="modalExclusaoTratamento"
+        >
+          Cancelar
+        </button>
+
+
+        <button
+          type="button"
+          id="btnConfirmarExclusaoTratamento"
+          class="btn btn-modal-perigo"
+        >
+          Excluir divergência
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       TOAST
+       ======================================================== -->
+
+  <div
+    id="tratamentoToast"
+    class="tratamento-toast hidden"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+</section>

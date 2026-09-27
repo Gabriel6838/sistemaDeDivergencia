@@ -1,0 +1,412 @@
+<section
+  id="backupPage"
+  class="backup-page"
+  aria-labelledby="backupTitulo"
+>
+
+  <!-- =====================================================
+       CABEÇALHO
+       ===================================================== -->
+
+  <header class="backup-header">
+
+    <div class="backup-header-text">
+
+      <div class="backup-eyebrow">
+        STOCKVISION
+      </div>
+
+      <h1
+        id="backupTitulo"
+        class="backup-title"
+      >
+        Backup e restauração
+      </h1>
+
+      <p class="backup-subtitle">
+        Proteja os dados do StockVision criando,
+        importando ou restaurando backups completos.
+      </p>
+
+    </div>
+
+    <div
+      id="backupStatus"
+      class="backup-status"
+      data-status="normal"
+    >
+      <span class="backup-status-dot"></span>
+
+      <span
+        id="backupStatusTexto"
+        class="backup-status-text"
+      >
+        Pronto para realizar um backup.
+      </span>
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       GRID PRINCIPAL
+       ===================================================== -->
+
+  <div class="backup-grid">
+
+
+    <!-- ===================================================
+         CRIAR BACKUP
+         =================================================== -->
+
+    <article class="backup-card">
+
+      <div class="backup-card-icon backup-icon-blue">
+        <span>↓</span>
+      </div>
+
+      <div class="backup-card-content">
+
+        <span class="backup-card-label">
+          SEGURANÇA
+        </span>
+
+        <h2 class="backup-card-title">
+          Criar backup
+        </h2>
+
+        <p class="backup-card-description">
+          Baixe uma cópia completa dos dados
+          armazenados no StockVision.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        id="btnCriarBackup"
+        class="backup-button backup-button-primary"
+      >
+        <span class="backup-button-icon">↓</span>
+        Criar backup
+      </button>
+
+    </article>
+
+
+    <!-- ===================================================
+         ÚLTIMO BACKUP
+         =================================================== -->
+
+    <article class="backup-card backup-card-last">
+
+      <div class="backup-card-icon backup-icon-green">
+        <span>✓</span>
+      </div>
+
+      <div class="backup-card-content">
+
+        <span class="backup-card-label">
+          ÚLTIMO BACKUP
+        </span>
+
+        <h2
+          id="backupUltimo"
+          class="backup-card-title"
+        >
+          Nenhum backup registrado
+        </h2>
+
+        <p
+          id="backupUltimoArquivo"
+          class="backup-card-description"
+        >
+          Nenhum backup criado nesta sessão.
+        </p>
+
+        <div
+          id="backupUltimosRegistros"
+          class="backup-last-summary"
+        >
+          —
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ===================================================
+         IMPORTAR BACKUP
+         =================================================== -->
+
+    <article class="backup-card backup-card-import">
+
+      <div class="backup-card-icon backup-icon-purple">
+        <span>↑</span>
+      </div>
+
+      <div class="backup-card-content">
+
+        <span class="backup-card-label">
+          RESTAURAÇÃO
+        </span>
+
+        <h2 class="backup-card-title">
+          Importar backup
+        </h2>
+
+        <p class="backup-card-description">
+          Selecione um arquivo JSON gerado pelo
+          StockVision para visualizar e restaurar os dados.
+        </p>
+
+      </div>
+
+
+      <div
+        id="backupDropzone"
+        class="backup-dropzone"
+      >
+
+        <div class="backup-dropzone-icon">
+          ↑
+        </div>
+
+        <strong>
+          Arraste o arquivo JSON aqui
+        </strong>
+
+        <span>
+          ou selecione um arquivo no computador
+        </span>
+
+        <button
+          type="button"
+          id="btnSelecionarBackup"
+          class="backup-button backup-button-secondary"
+        >
+          Selecionar arquivo
+        </button>
+
+        <input
+          type="file"
+          id="inputArquivoBackup"
+          accept=".json,application/json"
+          hidden
+        >
+
+      </div>
+
+    </article>
+
+
+    <!-- ===================================================
+         PREVIEW
+         =================================================== -->
+
+    <article
+      id="backupPreview"
+      class="backup-card backup-preview"
+      hidden
+    >
+
+      <div class="backup-preview-header">
+
+        <div>
+
+          <span class="backup-card-label">
+            ARQUIVO SELECIONADO
+          </span>
+
+          <h2
+            id="backupPreviewNome"
+            class="backup-card-title"
+          >
+            backup.json
+          </h2>
+
+        </div>
+
+        <button
+          type="button"
+          id="btnRemoverBackupSelecionado"
+          class="backup-icon-button"
+          aria-label="Remover arquivo selecionado"
+          title="Remover arquivo"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="backup-file-meta">
+
+        <div class="backup-meta-item">
+
+          <span class="backup-meta-label">
+            Versão
+          </span>
+
+          <strong id="backupPreviewVersao">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="backup-meta-item">
+
+          <span class="backup-meta-label">
+            Gerado em
+          </span>
+
+          <strong id="backupPreviewData">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="backup-count-grid">
+
+        <div class="backup-count">
+
+          <span class="backup-count-value">
+            <span id="backupPreviewCompetencias">
+              0
+            </span>
+          </span>
+
+          <span class="backup-count-label">
+            Competências
+          </span>
+
+        </div>
+
+
+        <div class="backup-count">
+
+          <span class="backup-count-value">
+            <span id="backupPreviewProdutos">
+              0
+            </span>
+          </span>
+
+          <span class="backup-count-label">
+            Produtos
+          </span>
+
+        </div>
+
+
+        <div class="backup-count">
+
+          <span class="backup-count-value">
+            <span id="backupPreviewDivergencias">
+              0
+            </span>
+          </span>
+
+          <span class="backup-count-label">
+            Divergências
+          </span>
+
+        </div>
+
+
+        <div class="backup-count">
+
+          <span class="backup-count-value">
+            <span id="backupPreviewTrocas">
+              0
+            </span>
+          </span>
+
+          <span class="backup-count-label">
+            Trocas
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="backupPreviewAviso"
+        class="backup-preview-warning"
+      >
+        A restauração substituirá os dados atuais
+        do banco.
+      </div>
+
+
+      <div class="backup-preview-actions">
+
+        <button
+          type="button"
+          id="btnRestaurarBackup"
+          class="backup-button backup-button-primary"
+          disabled
+        >
+          <span class="backup-button-icon">
+            ↻
+          </span>
+
+          Restaurar backup
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- ===================================================
+         ZONA DE PERIGO
+         =================================================== -->
+
+    <article
+      class="backup-card backup-danger-card"
+    >
+
+      <div class="backup-danger-content">
+
+        <div class="backup-card-icon backup-icon-red">
+          <span>!</span>
+        </div>
+
+        <div>
+
+          <span class="backup-card-label">
+            ZONA DE PERIGO
+          </span>
+
+          <h2 class="backup-card-title">
+            Apagar todos os dados
+          </h2>
+
+          <p class="backup-card-description">
+            Remove todas as competências, produtos,
+            divergências e trocas armazenados no banco.
+          </p>
+
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        id="btnApagarTudoBanco"
+        class="backup-button backup-button-danger"
+      >
+        Apagar todos os dados
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
